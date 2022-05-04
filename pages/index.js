@@ -3,9 +3,11 @@ import Image from 'next/image';
 import Header from '../components/Header';
 import Results from '../components/Results';
 import Thumbnail from '../components/Thumbnail';
+import WelcomeHero from '../components/WelcomeHero';
 import requests from '../utils/requests';
+
 const API_KEY = process.env.API_KEY;
-console.log('api', API_KEY);
+
 export default function Home({ results }) {
   console.log('props', results);
   return (
@@ -17,6 +19,7 @@ export default function Home({ results }) {
       </Head>
       <Header />
       {/* <Thumbnail results={results} /> */}
+      <WelcomeHero />
       <Results results={results} />
     </div>
   );
@@ -25,9 +28,8 @@ export default function Home({ results }) {
 export async function getServerSideProps() {
   // const API_KEY = process.env.RAWG_API_KEY;
   const request = await fetch(
-    `https://api.rawg.io/api/games?key=${API_KEY}`
+    `https://api.rawg.io/api/games?key=${API_KEY}&page_size=5`
   ).then((res) => res.json());
-  console.log(request);
 
   return {
     props: {

@@ -4,9 +4,9 @@ function Results({ results }) {
   console.log('results', results);
   return (
     <div>
-      {/* {results.map((result) => (
+      {results.map((result) => (
         <Thumbnail key={result.id} result={result} />
-      ))} */}
+      ))}
     </div>
   );
 }
