@@ -1,6 +1,13 @@
+import {
+  BadgeCheckIcon,
+  CollectionIcon,
+  LightningBoltIcon,
+  UserIcon,
+} from '@heroicons/react/outline';
+
 function WelcomeHero() {
   return (
-    <div class="py-20 from-[#1a052f] via-white to-[#1a052f] bg-gradient-to-b">
+    <div class="py-20 from-white via-white to-[#1a052f] bg-gradient-to-b">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="lg:text-center">
           <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">
@@ -19,32 +26,28 @@ function WelcomeHero() {
             <div class="relative">
               <dt>
                 <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                  {/* <!-- Heroicon name: outline/globe-alt --> */}
                   <svg
-                    class="h-6 w-6"
                     xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="2"
                     stroke="currentColor"
-                    aria-hidden="true"
+                    stroke-width="2"
                   >
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                      d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
                     />
                   </svg>
                 </div>
                 <p class="ml-16 text-lg leading-6 font-medium text-gray-900">
-                  Competitive exchange rates
+                  Keep track of every games you've played
                 </p>
               </dt>
-              <dd class="mt-2 ml-16 text-base text-black">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Maiores impedit perferendis suscipit eaque, iste dolor
-                cupiditate blanditiis ratione.
-              </dd>
+              {/* <dd class="mt-2 ml-16 text-base text-black">
+                Keep track of every games you've played
+              </dd> */}
             </div>
 
             <div class="relative">
@@ -52,30 +55,29 @@ function WelcomeHero() {
                 <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
                   {/* <!-- Heroicon name: outline/scale --> */}
                   <svg
-                    class="h-6 w-6"
                     xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="2"
                     stroke="currentColor"
-                    aria-hidden="true"
+                    stroke-width="2"
                   >
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
+                      d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
                     />
                   </svg>
                 </div>
                 <p class="ml-16 text-lg leading-6 font-medium text-gray-900">
-                  No hidden fees
+                  Rate each game on a five-star scale (with halves) to record
+                  and share your reaction
                 </p>
               </dt>
-              <dd class="mt-2 ml-16 text-base text-gray-500">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Maiores impedit perferendis suscipit eaque, iste dolor
-                cupiditate blanditiis ratione.
-              </dd>
+              {/* <dd class="mt-2 ml-16 text-base text-black">
+                Rate each game on a five-star scale (with halves) to record and
+                share your reaction
+              </dd> */}
             </div>
 
             <div class="relative">
@@ -83,30 +85,29 @@ function WelcomeHero() {
                 <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
                   {/* <!-- Heroicon name: outline/lightning-bolt --> */}
                   <svg
-                    class="h-6 w-6"
                     xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="2"
                     stroke="currentColor"
-                    aria-hidden="true"
+                    stroke-width="2"
                   >
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                     />
                   </svg>
                 </div>
                 <p class="ml-16 text-lg leading-6 font-medium text-gray-900">
-                  Transfers are instant
+                  Write and share reviews, and follow friends and other memebers
+                  to read theirs
                 </p>
               </dt>
-              <dd class="mt-2 ml-16 text-base text-gray-500">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Maiores impedit perferendis suscipit eaque, iste dolor
-                cupiditate blanditiis ratione.
-              </dd>
+              {/* <dd class="mt-2 ml-16 text-base text-black">
+                Write and share reviews, and follow friends and other memebers
+                to read theirs
+              </dd> */}
             </div>
 
             <div class="relative">
@@ -114,30 +115,28 @@ function WelcomeHero() {
                 <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
                   {/* <!-- Heroicon name: outline/annotation --> */}
                   <svg
-                    class="h-6 w-6"
                     xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="2"
                     stroke="currentColor"
-                    aria-hidden="true"
+                    stroke-width="2"
                   >
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                     />
                   </svg>
                 </div>
                 <p class="ml-16 text-lg leading-6 font-medium text-gray-900">
-                  Mobile notifications
+                  Compile and share lists of games and keep a list of games to
+                  see
                 </p>
               </dt>
-              <dd class="mt-2 ml-16 text-base text-gray-500">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Maiores impedit perferendis suscipit eaque, iste dolor
-                cupiditate blanditiis ratione.
-              </dd>
+              {/* <dd class="mt-2 ml-16 text-base text-black">
+                Compile and share lists of games and keep a list of games to see
+              </dd> */}
             </div>
           </dl>
         </div>

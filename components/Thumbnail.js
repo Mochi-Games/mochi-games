@@ -11,8 +11,8 @@ function Thumbnail({ result }) {
         flexWrap: 'wrap',
         '& > :not(style)': {
           m: 1,
-          width: 400,
-          height: 400,
+          width: 200,
+          height: 140,
         },
       }}
     >
