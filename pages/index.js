@@ -28,7 +28,7 @@ export default function Home({ results }) {
 export async function getServerSideProps() {
   // const API_KEY = process.env.RAWG_API_KEY;
   const request = await fetch(
-    `https://api.rawg.io/api/games?key=${API_KEY}&page_size=5`
+    `https://api.rawg.io/api/games?key=${API_KEY}&page_size=6`
   ).then((res) => res.json());
 
   return {

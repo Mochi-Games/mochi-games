@@ -1,13 +1,6 @@
-import {
-  BadgeCheckIcon,
-  CollectionIcon,
-  LightningBoltIcon,
-  UserIcon,
-} from '@heroicons/react/outline';
-
 function WelcomeHero() {
   return (
-    <div class="py-20 from-white via-white to-[#1a052f] bg-gradient-to-b">
+    <div class="px-20 py-20 from-white via-white to-[#1a052f] bg-gradient-to-b">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="lg:text-center">
           <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">

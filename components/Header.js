@@ -1,5 +1,7 @@
 import HeaderItem from './HeaderItem';
 import { HomeIcon, SearchIcon, UserIcon } from '@heroicons/react/outline';
+import mochigames from '../public/mochigames.png';
+import Image from 'next/image';
 
 function Header() {
   return (
@@ -9,6 +11,7 @@ function Header() {
         <HeaderItem title="SEARCH" Icon={SearchIcon} />
         <HeaderItem title="ACCOUNT" Icon={UserIcon} />
       </div>
+      <Image src={mochigames.src} width={200} height={100} />
     </header>
   );
 }

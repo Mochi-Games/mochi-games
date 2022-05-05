@@ -1,11 +1,24 @@
 import Thumbnail from './Thumbnail';
+import { useRouter } from 'next/router';
+
+const ROUTE_POST_ID = 'game/[id]';
 
 function Results({ results }) {
   console.log('results', results);
+  const router = useRouter();
+
+  const navigate = (id) =>
+    router.push({
+      pathname: ROUTE_POST_ID,
+      query: { id },
+    });
+
   return (
-    <div className="px-5 mt-10 grid grid-cols-1 gap-y-10 gap-x-1 sm:grid-cols-2 lg:grid-cols-5 xl:gap-x-8">
+    <div className="container py-20 grid grid-cols-3 gap-2 mx-auto">
       {results.map((result) => (
-        <Thumbnail key={result.id} result={result} />
+        <div key={`game-${result.id}`} onClick={() => navigate(result.id)}>
+          <Thumbnail key={result.id} result={result} />
+        </div>
       ))}
     </div>
   );
