@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  border-style: dotted;
+  border-color: blue;
+}
+
+.ul {
+  display: flex;
+  flex: 1;
+}
+
+.li {
+  display: flex;
+}
