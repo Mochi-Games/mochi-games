@@ -4,6 +4,7 @@ import { Prisma } from '@prisma/client';
 import axios from 'axios';
 import { server } from '../../utils';
 import { useState } from 'react';
+import styles from '/styles/Home.module.css';
 
 const API_KEY = process.env.RAWG_API_KEY;
 
@@ -13,7 +14,19 @@ const API_KEY = process.env.RAWG_API_KEY;
 // };
 
 function GamePage({ game }) {
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState(0);
+  const [formData, setFormData] = useState({});
+
+  async function saveReview(e) {
+    e.preventDefault();
+    console.log(formData);
+    // setMovies([...movies, formData]);
+    const response = await axios('/api/review', {
+      method: 'POST',
+      body: JSON.stringify(formData),
+    });
+    return await response.json();
+  }
   //   const [comment, setComment] = useState('');
   //   const [rating, setRating] = useState('');
 
@@ -22,7 +35,7 @@ function GamePage({ game }) {
   //     e.preventDefault();
   //     try {
   //       const body = { comment, rating };
-  //       await axios('/api/create', {
+  //       await axios('../api/create', {
   //         method: 'POST',
   //         headers: { 'Content-Type': 'application/json' },
   //         body: JSON.stringify(body),
@@ -45,39 +58,29 @@ function GamePage({ game }) {
       <Typography variant="h3" gutterBottom component="div">
         {game.name}
       </Typography>
-
-      <img style={{ width: '100%' }} src={game.background_image} alt="" />
-
-      <Rating
-        name="simple-controlled"
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-      />
-      <TextField
-        required
-        id="outlined-required"
-        label="Required"
-        defaultValue="Hello World"
-      />
-      {/* <form onSubmit={submitHandler}>
-        <input
-          type="text"
-          placeholder="What did you think of this game?"
-          onChange={(e) => setComment(e.target.value)}
-          value={comment}
+      <form className={styles.reviewform} onSubmit={saveReview}>
+        <img style={{ width: '100%' }} src={game.background_image} alt="" />
+        <Rating
+          name="simple-controlled"
+          precision={0.5}
+          value={value}
+          onChange={(e, newValue) => {
+            setValue(newValue),
+              setFormData({ ...formData, rating: +e.target.value });
+          }}
         />
-        <input
-          type="number"
-          min="1"
-          max="5"
-          placeholder="how many stars out of 5"
-          onChange={(e) => setRating(e.target.value)}
-          value={rating}
+        <textarea
+          name="comment"
+          id=""
+          cols="30"
+          rows="10"
+          placeholder="comment"
+          onChange={(e) =>
+            setFormData({ ...formData, comment: e.target.value })
+          }
         />
-        <input type="submit" value="Submit" onClick={resetInputFields} />
-      </form> */}
+        <button type="submit">Add review</button>
+      </form>
     </div>
   );
 }
@@ -95,12 +98,8 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  // const API_KEY = process.env.RAWG_API_KEY;
   const res = await axios(`${server}?key=${API_KEY}&page_size=6`);
   const games = res.data.results;
-  // const request = await fetch(
-  //   `https://api.rawg.io/api/games?key=${API_KEY}&page_size=6`
-  // ).then((res) => res.json());
   const ids = games.map((game) => game.id);
   const paths = ids.map((id) => ({ params: { id: id.toString() } }));
 

@@ -9,9 +9,6 @@ import axios from 'axios';
 import { server } from '../utils';
 import {useSession} from 'next-auth/react'
 
-
-
-
 const API_KEY = process.env.RAWG_API_KEY;
 
 export default function Home({ results }) {
