@@ -8,7 +8,7 @@ import requests from '../utils/requests';
 import axios from 'axios';
 import { server } from '../utils';
 
-const API_KEY = process.env.API_KEY;
+const API_KEY = process.env.RAWG_API_KEY;
 
 export default function Home({ results }) {
   console.log('props', results);

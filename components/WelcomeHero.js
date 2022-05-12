@@ -122,7 +122,7 @@ function WelcomeHero() {
                     />
                   </svg>
                 </div>
-                <p class="ml-16 text-lg leading-6 font-medium text-gray-900">
+                <p className="ml-16 text-lg leading-6 font-medium text-gray-900">
                   Compile and share lists of games and keep a list of games to
                   see
                 </p>
