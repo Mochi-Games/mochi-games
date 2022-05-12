@@ -5,6 +5,7 @@ import axios from 'axios';
 import { server } from '../../utils';
 import { useState } from 'react';
 import styles from '/styles/Home.module.css';
+import { SessionProvider, useSession } from 'next-auth/react';
 
 const API_KEY = process.env.RAWG_API_KEY;
 
@@ -16,6 +17,10 @@ const API_KEY = process.env.RAWG_API_KEY;
 function GamePage({ game }) {
   const [value, setValue] = useState(0);
   const [formData, setFormData] = useState({});
+  const session = useSession();
+  const status = session.status;
+  console.log('session', session, 'status', session.status);
+
 
   async function saveReview(e) {
     e.preventDefault();
@@ -54,34 +59,40 @@ function GamePage({ game }) {
 
   //   console.log('gamepageresults', game);
   return (
-    <div>
-      <Typography variant="h3" gutterBottom component="div">
-        {game.name}
-      </Typography>
-      <form className={styles.reviewform} onSubmit={saveReview}>
-        <img style={{ width: '100%' }} src={game.background_image} alt="" />
-        <Rating
-          name="simple-controlled"
-          precision={0.5}
-          value={value}
-          onChange={(e, newValue) => {
-            setValue(newValue),
-              setFormData({ ...formData, rating: +e.target.value });
-          }}
-        />
-        <textarea
-          name="comment"
-          id=""
-          cols="30"
-          rows="10"
-          placeholder="comment"
-          onChange={(e) =>
-            setFormData({ ...formData, comment: e.target.value })
-          }
-        />
-        <button type="submit">Add review</button>
-      </form>
-    </div>
+    <>
+      <SessionProvider session={session}>
+        <div>
+          <Typography variant="h3" gutterBottom component="div">
+            {game.name}
+          </Typography>
+            <img style={{ width: '100%' }} src={game.background_image} alt="" />
+              {status === 'authenticated' ? (
+                <form className={styles.reviewform} onSubmit={saveReview}>
+                  <Rating
+                    name="simple-controlled"
+                    precision={0.5}
+                    value={value}
+                    onChange={(e, newValue) => {
+                      setValue(newValue),
+                        setFormData({ ...formData, rating: +e.target.value });
+                    }}
+                  />
+                  <textarea
+                    name="comment"
+                    id=""
+                    cols="30"
+                    rows="10"
+                    placeholder="comment"
+                    onChange={(e) =>
+                      setFormData({ ...formData, comment: e.target.value })
+                    }
+                  />
+                  <button type="submit">Add review</button>
+                </form>) : (<>Please log in to leave a review!</>)
+                }
+        </div>
+      </SessionProvider>
+    </>
   );
 }
 
