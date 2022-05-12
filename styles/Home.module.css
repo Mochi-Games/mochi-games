@@ -1,0 +1,25 @@
+.reviewform {
+    background: #efefef;
+    padding: 20px;
+    max-width: 700px;
+  }
+  
+  .reviewform input, .reviewform textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    color: black;
+    margin-bottom: 20px;
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 16px;
+  }
+  
+  .reviewform button {
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    background: #0E9D58;
+    color: #ffffff;
+    font-size: 16px;
+  }
