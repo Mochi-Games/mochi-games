@@ -1,9 +1,10 @@
 import NextAuth from "next-auth"
 import TwitchProvider from "next-auth/providers/twitch"
 import GoogleProvider from "next-auth/providers/google"
-// import EmailProvider from "next-auth/providers/email"
-// import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import { PrismaClient } from "@prisma/client"
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
 // import { getToken } from "next-auth/jwt"
+// import EmailProvider from "next-auth/providers/email"
 
 
 export default NextAuth({

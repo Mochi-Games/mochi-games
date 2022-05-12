@@ -44,8 +44,9 @@ export default function AuthModal({open, close}) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            <Button onClick={signInWithTwitch}>Sign in with Twitch</Button>
-            <Button onClick={signInWithGoogle}>Sign in with Google</Button>
+            <Button onClick={signInWithTwitch}>Twitch</Button>
+            <br></br>
+            <Button onClick={signInWithGoogle}>Google</Button>
           </Typography>
           {/* <Typography> */}
             {/* <Button onClick={} */}

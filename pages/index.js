@@ -7,13 +7,12 @@ import WelcomeHero from '../components/WelcomeHero';
 import requests from '../utils/requests';
 import axios from 'axios';
 import { server } from '../utils';
-import {useSession} from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 
 const API_KEY = process.env.RAWG_API_KEY;
 
 export default function Home({ results }) {
   const res = useSession();
-  console.log(res);
   // console.log('props', results);
   return (
     <div>
