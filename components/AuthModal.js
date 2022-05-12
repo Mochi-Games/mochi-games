@@ -1,10 +1,9 @@
-import { signIn, signOut } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import { toast } from 'react-hot-toast'
-// import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import Modal from '@mui/material/Modal'
 
 
 const signInWithTwitch = () => {

@@ -1,5 +1,5 @@
 import HeaderItem from './HeaderItem';
-import { HomeIcon, SearchIcon, UserIcon } from '@heroicons/react/outline';
+import { HomeIcon, LoginIcon, LogoutIcon, SearchIcon, UserIcon } from '@heroicons/react/outline';
 import mochigames from '../public/mochigames.png';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -37,7 +37,12 @@ function Header() {
             </Link>
             {/* <button onClick={handleOpen}>Show Modal</button> */}
             <nav>
-              { auth === 'unauthenticated' ? <button onClick={handleOpen}>Show Modal</button> : <button onClick={signOut}>Sign Out</button>}
+              { auth === 'unauthenticated' ? (
+                  <button onClick={handleOpen}> <HeaderItem title="LOG IN" Icon={LoginIcon} /> </button>
+                ) : (
+                <button onClick={signOut}> <HeaderItem title="LOG OUT"  Icon={LogoutIcon} /> </button>
+                )
+              }
             </nav>
           </div>
           <Link href="/">
@@ -47,9 +52,7 @@ function Header() {
             </a>
           </Link>
         </header>
-        <>
-          <AuthModal open={open} close={handleClose}/>
-        </>
+        <AuthModal open={open} close={handleClose}/>
       </SessionProvider>
     </>
   );
