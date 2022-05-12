@@ -1,6 +1,5 @@
 import Layout from '../components/Layout';
-import { SessionProvider } from 'next-auth/react'
-// import { useSession } from 'next-auth/react' 
+import { SessionProvider } from 'next-auth/react' 
 import { Toaster } from 'react-hot-toast'
 import '../styles/globals.css'
 

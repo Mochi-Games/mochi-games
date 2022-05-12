@@ -1,10 +1,11 @@
 import { getProviders, signIn, signOut, useSession } from "next-auth/react"
+import AuthModal from "../../../components/AuthModal";
 
 
 
 const SignIn = ({ providers }) => {
-  const res = useSession()
-  console.log(res.data)
+  const res = useSession();
+  // console.log(res.data)
   return (
     <>
     {/* <button onClick={() => signIn()}>
@@ -27,8 +28,10 @@ export default SignIn
 
 export async function getServerSideProps(context) {
   const providers = await getProviders()
-  console.log('providers', providers);
+  // console.log('providers', providers);
   return {
     props: { providers },
   }
 }
+
+

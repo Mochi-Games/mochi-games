@@ -7,11 +7,17 @@ import WelcomeHero from '../components/WelcomeHero';
 import requests from '../utils/requests';
 import axios from 'axios';
 import { server } from '../utils';
+import {useSession} from 'next-auth/react'
 
-const API_KEY = process.env.API_KEY;
+
+
+
+const API_KEY = process.env.RAWG_API_KEY;
 
 export default function Home({ results }) {
-  console.log('props', results);
+  const res = useSession();
+  console.log(res);
+  // console.log('props', results);
   return (
     <div>
       <Head>
@@ -28,7 +34,7 @@ export default function Home({ results }) {
 
 export async function getServerSideProps() {
   // const API_KEY = process.env.RAWG_API_KEY;
-  const res = await axios(`${server}?key=${API_KEY}&page_size=6`);
+  const res = await axios.get(`${server}?key=${API_KEY}&page_size=6`);
   const games = res.data.results;
   // const request = await fetch(
   //   `https://api.rawg.io/api/games?key=${API_KEY}&page_size=6`

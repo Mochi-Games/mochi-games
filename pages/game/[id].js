@@ -5,7 +5,7 @@ import axios from 'axios';
 import { server } from '../../utils';
 import { useState } from 'react';
 
-const API_KEY = process.env.API_KEY;
+const API_KEY = process.env.RAWG_API_KEY;
 
 // const styles = {
 //   background:
