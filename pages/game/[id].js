@@ -6,11 +6,11 @@ import {
   Card,
   CardMedia,
   IconButton,
+  Box,
 } from '@mui/material';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CreateIcon from '@mui/icons-material/Create';
-import { style } from '@mui/system';
 import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
 import { server } from '../../utils';
@@ -18,7 +18,6 @@ import { useState } from 'react';
 import styles from '/styles/Home.module.css';
 import { SessionProvider, useSession } from 'next-auth/react';
 import ReviewComp from '../../components/ReviewComp';
-import { HeartBrokenOutlined } from '@mui/icons-material';
 
 const API_KEY = process.env.RAWG_API_KEY;
 
