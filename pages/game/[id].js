@@ -77,7 +77,50 @@ function GamePage({ game, allReviewsGame }) {
           <Typography variant="h3" gutterBottom component="div">
             {game.name}
           </Typography>
-          <img style={{ width: '100%' }} src={game.background_image} alt="" />
+          <Container sx={{ display: 'flex' }}>
+        <Card sx={{ maxWidth: 300, maxHeight: 300 }}>
+          <CardMedia
+            component="img"
+            height="300"
+            image={game.background_image}
+            alt={game.slug}
+          />
+          <Rating
+            name="simple-controlled"
+            precision={0.5}
+            value={value}
+            onChange={(e, newValue) => {
+              setValue(newValue),
+                setFormData({ ...formData, rating: +e.target.value });
+            }}
+          />
+          <div display="flex" justifyContent="space-between">
+            <IconButton>
+              <FavoriteIcon sx={{ '&:hover': { color: 'red' } }} />
+            </IconButton>
+            <IconButton>
+              <CheckCircleOutlineOutlinedIcon
+                sx={{ '&:hover': { color: 'green' } }}
+              />
+            </IconButton>
+            <IconButton>
+              <CreateIcon sx={{ '&:hover': { color: 'blue' } }} />
+            </IconButton>
+          </div>
+        </Card>
+        <Container sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Typography variant="h3" gutterBottom component="div">
+            {game.name}
+          </Typography>
+          <Typography variant="h6">
+            Released: {game.released} by {game.publishers[0].name}
+          </Typography>
+          <Typography variant="h5" gutterBottom component="div">
+            {game.description_raw}
+          </Typography>
+        </Container>
+      </Container>
+            
           {status === 'authenticated' ? (
             <form className={styles.reviewform} onSubmit={saveReview}>
               <Rating
