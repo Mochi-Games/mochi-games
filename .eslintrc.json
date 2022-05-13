@@ -2,8 +2,8 @@
   "extends": "next/core-web-vitals",
   "plugins": ["tailwindcss"],
   "rules": {
-    "tailwindcss/classnames-order": "warn",
     "tailwindcss/no-custom-classname": "warn",
+    "react/no-unescaped-entities": "off",
     "tailwindcss/no-contradicting-classname": "error"
   }
 }
