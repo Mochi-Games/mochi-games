@@ -29,7 +29,7 @@ model Review {
   rating    Int
   comment   String
   userId    String?
-  gameId    String?
+  gameId    Int?
   // game      Game?    @relation(fields: [gameId], references: [id])
   // user      User?    @relation(fields: [userId], references: [id])
 }
