@@ -6,18 +6,17 @@ import {
   Card,
   CardMedia,
   IconButton,
+  Box,
 } from '@mui/material';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CreateIcon from '@mui/icons-material/Create';
-import { style } from '@mui/system';
 import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
 import { server } from '../../utils';
 import { useState } from 'react';
 import styles from '/styles/Home.module.css';
 import ReviewComp from '../../components/ReviewComp';
-import { HeartBrokenOutlined } from '@mui/icons-material';
 
 const API_KEY = process.env.RAWG_API_KEY;
 
@@ -102,51 +101,54 @@ function GamePage({ game, allReviewsGame }) {
             </IconButton>
           </div>
         </Card>
-      </Container>
-      <Container sx={{ display: 'flex' }}>
-        <Typography variant="h3" gutterBottom component="div">
-          {game.name}
-        </Typography>
-      </Container>
-      <Container>
-        <Typography variant="h5" gutterBottom component="div">
-          {game.description_raw}
-        </Typography>
+        <Container sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Typography variant="h3" gutterBottom component="div">
+            {game.name}
+          </Typography>
+          <Typography variant="h6">
+            Released: {game.released} by {game.publishers[0].name}
+          </Typography>
+          <Typography variant="h5" gutterBottom component="div">
+            {game.description_raw}
+          </Typography>
+        </Container>
       </Container>
 
-      <form className={styles.reviewform} onSubmit={saveReview}>
-        <img style={{ width: '100%' }} src={game.background_image} alt="" />
-        <Rating
-          name="simple-controlled"
-          precision={0.5}
-          value={value}
-          onChange={(e, newValue) => {
-            setValue(newValue),
-              setFormData({ ...formData, rating: +e.target.value });
-          }}
-        />
-        <textarea
-          name="comment"
-          id=""
-          cols="30"
-          rows="10"
-          placeholder="comment"
-          onChange={(e) => {
-            setFormData({
-              ...formData,
-              comment: e.target.value,
-              gameId: game.id,
-            });
-          }}
-        />
-        <button type="submit">Add review</button>
-      </form>
-      <div>
+      <Container>
+        <form className={styles.reviewform} onSubmit={saveReview}>
+          <Rating
+            name="simple-controlled"
+            precision={0.5}
+            value={value}
+            onChange={(e, newValue) => {
+              setValue(newValue),
+                setFormData({ ...formData, rating: +e.target.value });
+            }}
+          />
+          <textarea
+            name="comment"
+            id=""
+            cols="30"
+            rows="10"
+            placeholder="comment"
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                comment: e.target.value,
+                gameId: game.id,
+              });
+            }}
+          />
+          <button type="submit">Add review</button>
+        </form>
+      </Container>
+
+      <Container>
         <Typography variant="h5">Recent Reviews:</Typography>
         {allReviewsGame.map((review, i) => (
           <ReviewComp review={review} key={i} />
         ))}
-      </div>
+      </Container>
     </div>
   );
 }
