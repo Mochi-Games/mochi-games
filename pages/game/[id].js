@@ -1,4 +1,15 @@
-import { Container, Rating, TextField, Typography } from '@mui/material';
+import {
+  Container,
+  Rating,
+  TextField,
+  Typography,
+  Card,
+  CardMedia,
+  IconButton,
+} from '@mui/material';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import CreateIcon from '@mui/icons-material/Create';
 import { style } from '@mui/system';
 import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
@@ -6,6 +17,7 @@ import { server } from '../../utils';
 import { useState } from 'react';
 import styles from '/styles/Home.module.css';
 import ReviewComp from '../../components/ReviewComp';
+import { HeartBrokenOutlined } from '@mui/icons-material';
 
 const API_KEY = process.env.RAWG_API_KEY;
 
@@ -56,12 +68,51 @@ function GamePage({ game, allReviewsGame }) {
   //     }, 3000);
   //   };
 
-  //   console.log('gamepageresults', game);
+  console.log('gamepageresults', game);
   return (
     <div>
-      <Typography variant="h3" gutterBottom component="div">
-        {game.name}
-      </Typography>
+      <Container sx={{ display: 'flex' }}>
+        <Card sx={{ maxWidth: 300, maxHeight: 300 }}>
+          <CardMedia
+            component="img"
+            height="300"
+            image={game.background_image}
+            alt={game.slug}
+          />
+          <Rating
+            name="simple-controlled"
+            precision={0.5}
+            value={value}
+            onChange={(e, newValue) => {
+              setValue(newValue),
+                setFormData({ ...formData, rating: +e.target.value });
+            }}
+          />
+          <div display="flex" justifyContent="space-between">
+            <IconButton>
+              <FavoriteIcon sx={{ '&:hover': { color: 'red' } }} />
+            </IconButton>
+            <IconButton>
+              <CheckCircleOutlineOutlinedIcon
+                sx={{ '&:hover': { color: 'green' } }}
+              />
+            </IconButton>
+            <IconButton>
+              <CreateIcon sx={{ '&:hover': { color: 'blue' } }} />
+            </IconButton>
+          </div>
+        </Card>
+      </Container>
+      <Container sx={{ display: 'flex' }}>
+        <Typography variant="h3" gutterBottom component="div">
+          {game.name}
+        </Typography>
+      </Container>
+      <Container>
+        <Typography variant="h5" gutterBottom component="div">
+          {game.description_raw}
+        </Typography>
+      </Container>
 
       <form className={styles.reviewform} onSubmit={saveReview}>
         <img style={{ width: '100%' }} src={game.background_image} alt="" />
