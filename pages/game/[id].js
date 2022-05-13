@@ -16,6 +16,7 @@ import axios from 'axios';
 import { server } from '../../utils';
 import { useState } from 'react';
 import styles from '/styles/Home.module.css';
+import { SessionProvider, useSession } from 'next-auth/react';
 import ReviewComp from '../../components/ReviewComp';
 
 const API_KEY = process.env.RAWG_API_KEY;
@@ -30,7 +31,8 @@ const prisma = new PrismaClient();
 function GamePage({ game, allReviewsGame }) {
   const [value, setValue] = useState(0);
   const [formData, setFormData] = useState({});
-  // const [allReviews, setAllReviews] = useState(allReviews);
+  const session = useSession();
+  const status = session.status;
 
   async function saveReview(e) {
     e.preventDefault();
@@ -69,8 +71,13 @@ function GamePage({ game, allReviewsGame }) {
 
   console.log('gamepageresults', game);
   return (
-    <div>
-      <Container sx={{ display: 'flex' }}>
+    <>
+      <SessionProvider session={session}>
+        <div>
+          <Typography variant="h3" gutterBottom component="div">
+            {game.name}
+          </Typography>
+          <Container sx={{ display: 'flex' }}>
         <Card sx={{ maxWidth: 300, maxHeight: 300 }}>
           <CardMedia
             component="img"
@@ -113,43 +120,46 @@ function GamePage({ game, allReviewsGame }) {
           </Typography>
         </Container>
       </Container>
-
-      <Container>
-        <form className={styles.reviewform} onSubmit={saveReview}>
-          <Rating
-            name="simple-controlled"
-            precision={0.5}
-            value={value}
-            onChange={(e, newValue) => {
-              setValue(newValue),
-                setFormData({ ...formData, rating: +e.target.value });
-            }}
-          />
-          <textarea
-            name="comment"
-            id=""
-            cols="30"
-            rows="10"
-            placeholder="comment"
-            onChange={(e) => {
-              setFormData({
-                ...formData,
-                comment: e.target.value,
-                gameId: game.id,
-              });
-            }}
-          />
-          <button type="submit">Add review</button>
-        </form>
-      </Container>
-
-      <Container>
-        <Typography variant="h5">Recent Reviews:</Typography>
-        {allReviewsGame.map((review, i) => (
-          <ReviewComp review={review} key={i} />
-        ))}
-      </Container>
-    </div>
+            
+          {status === 'authenticated' ? (
+            <form className={styles.reviewform} onSubmit={saveReview}>
+              <Rating
+                name="simple-controlled"
+                precision={0.5}
+                value={value}
+                onChange={(e, newValue) => {
+                  setValue(newValue),
+                    setFormData({ ...formData, rating: +e.target.value });
+                }}
+              />
+              <textarea
+                name="comment"
+                id=""
+                cols="30"
+                rows="10"
+                placeholder="comment"
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    comment: e.target.value,
+                    gameId: game.id,
+                  })
+                }
+              />
+              <button type="submit">Add review</button>
+            </form>
+          ) : (
+            <>Please log in to leave a review!</>
+          )}
+        </div>
+        <div>
+          <Typography variant="h5">Recent Reviews:</Typography>
+          {allReviewsGame.map((review, i) => (
+            <ReviewComp review={review} key={i} />
+          ))}
+        </div>
+      </SessionProvider>
+    </>
   );
 }
 
