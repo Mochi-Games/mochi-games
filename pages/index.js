@@ -1,13 +1,14 @@
 import Head from 'next/head';
-import Image from 'next/image';
-import Header from '../components/Header';
 import Results from '../components/Results';
-import Thumbnail from '../components/Thumbnail';
 import WelcomeHero from '../components/WelcomeHero';
-import requests from '../utils/requests';
 import axios from 'axios';
 import { server } from '../utils';
 import { useSession } from 'next-auth/react'
+
+// import requests from '../utils/requests';
+// import Thumbnail from '../components/Thumbnail';
+// import Image from 'next/image';
+// import Header from '../components/Header';
 
 const API_KEY = process.env.RAWG_API_KEY;
 

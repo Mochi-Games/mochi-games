@@ -50,8 +50,8 @@ export default NextAuth({
   //   }
   // },
   pages: {
-    signIn: '/',
-    signOut: '/',
+    signIn: '\window.location.href',
+    signOut: '\window.location.href',
     error: '/',
   },
 })
