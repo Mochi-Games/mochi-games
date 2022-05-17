@@ -31,8 +31,9 @@ model Review {
   comment   String
   userId    String?
   gameId    Int?
+  favorite  Boolean?
+  played    Boolean?
   // game      Game?    @relation(fields: [gameId], references: [id])
-  // user      User?    @relation(fields: [userId], references: [id])
 }
 
 model Game {

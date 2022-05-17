@@ -62,3 +62,28 @@ function search() {
 }
 
 export default search;
+
+// export async function getServerSideProps(context) {
+//   const { id } = context.params;
+//   const res = await axios(`${server}/?search='tomb raider'?&ey=${API_KEY}`);
+//   const game = res.data;
+//   const allReviewsGame = await prisma.review.findMany({
+//     // orderBy: {
+//     //   createdAt: 'desc',
+//     // },
+//     where: { gameId: game.id },
+//     // include: {
+//     //   select: {
+//     //     user: true,
+//     //   },
+//     // },
+//     //include: user
+//   });
+//   console.log('allreviews', allReviewsGame);
+//   return {
+//     props: {
+//       game,
+//       allReviewsGame: JSON.parse(JSON.stringify(allReviewsGame)),
+//     },
+//   };
+// }
