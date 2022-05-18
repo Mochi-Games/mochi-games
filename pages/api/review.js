@@ -11,5 +11,6 @@ export default async (req, res) => {
   const result = await prisma.review.create({
     data,
   });
-  res.json(result);
+
+  return res.json(result);
 };
