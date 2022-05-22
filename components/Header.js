@@ -6,7 +6,7 @@ import Link from 'next/link';
 import AuthModal from './AuthModal';
 import { useState } from 'react';
 import {SessionProvider, signOut, useSession} from 'next-auth/react';
-import save from './SaveUser';
+import saveUser from './SaveUser';
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -59,7 +59,7 @@ function Header() {
               <Image src={mochigames.src} width={'150%'} height={'100%'} />
             </a>
           </Link>
-          { auth === 'authenticated' ? (<button onClick={saveUser(session.data.user)}>save user</button>) : null
+          { auth === 'authenticated' ? (<button onClick={() => {saveUser(session.data.user)}}>save user</button>) : null
           }
         </header>
         <AuthModal open={open} close={handleClose}/>

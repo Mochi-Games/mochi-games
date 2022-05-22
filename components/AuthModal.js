@@ -1,33 +1,25 @@
-import { SessionProvider, signIn, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import { toast } from 'react-hot-toast'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
-import save from './SaveUser'
 
 const signInWithTwitch = async () => {
   toast.loading('Redirecting...');
-  await signIn('twitch', {
-    callbackUrl: window.location.href,
-    });
-  save(session.data.user);
-  console.log('signed in with twitch')
+  await signIn('twitch');
 }
 
 const signInWithGoogle = () => {
   toast.loading('Redirecting...');
-  signIn('google', {
-    callbackUrl: window.location.href,
-  });
+  signIn('google');
 }
-
-
-
 
 const style = {
   position: 'absolute',
-  top: '30%',
+  // display: 'flex',
+  // justifyContent: 'center',
+  top: '40%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
@@ -38,12 +30,11 @@ const style = {
 };
 
 export default function AuthModal({open, close}) {
-  const session = useSession();
-  console.log('sesh modal', session.data);
+  // const session = useSession();
 
   const modal = (
     <div>
-      <SessionProvider session={session}>
+      {/* <SessionProvider session={session}> */}
         <Modal
           open = {open}
           onClose={close}
@@ -61,7 +52,7 @@ export default function AuthModal({open, close}) {
             {/* </Typography> */}
           </Box>
         </Modal>
-      </SessionProvider>
+      {/* </SessionProvider> */}
     </div>
   );
 
