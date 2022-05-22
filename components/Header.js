@@ -4,9 +4,9 @@ import mochigames from '../public/mochigames.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import AuthModal from './AuthModal';
-import {Fragment, useState} from 'react';
+import { useState } from 'react';
 import {SessionProvider, signOut, useSession} from 'next-auth/react';
-
+import saveUser from './SaveUser';
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -14,7 +14,16 @@ function Header() {
   const handleClose = () => setOpen(false);
   const session = useSession();
   const auth = session.status;
+  console.log('session', session.data);
 
+  async function saveUser(user) {
+    const response = await fetch('/api/saveUser', {
+      method: 'POST',
+      body: JSON.stringify(user)
+    })
+    return await response.json()
+  }
+ 
   return (
     <>
       <SessionProvider session={session}>
@@ -35,7 +44,6 @@ function Header() {
                 <HeaderItem title="ACCOUNT" Icon={UserIcon} />
               </a>
             </Link>
-            {/* <button onClick={handleOpen}>Show Modal</button> */}
             <nav>
               { auth === 'unauthenticated' ? (
                   <button onClick={handleOpen}> <HeaderItem title="LOG IN" Icon={LoginIcon} /> </button>
@@ -48,9 +56,11 @@ function Header() {
           <Link href="/">
             <a>
               {' '}
-              <Image src={mochigames.src} width={200} height={100} />
+              <Image src={mochigames.src} width={'150%'} height={'100%'} />
             </a>
           </Link>
+          { auth === 'authenticated' ? (<button onClick={() => {saveUser(session.data.user)}}>save user</button>) : null
+          }
         </header>
         <AuthModal open={open} close={handleClose}/>
       </SessionProvider>
