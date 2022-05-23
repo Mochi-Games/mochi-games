@@ -50,77 +50,39 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function search() {
-  const [searchResults, setSearchResults] = useState([]);
-  const [formInputs, setFormInputs] = useState({});
-  const [searchTerm, setSearchTerm] = useState('');
-
-  // const searchEndpoint = (query) =>
-  //   `${server}/?search=${query}?&key=${API_KEY}`;
-
-  const handleInput = (e) => {
-    let { name, value } = e.target;
-    console.log(name, value);
-    setFormInputs({ ...formInputs, [name]: value });
-    setSearchTerm(e.target.value);
-  };
-
-  const search = async (req, res) => {
-    e.preventDefault();
-    await NextCors(req, res, {
-      // Options
-      methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-      origin: '*',
-      optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-    });
-    res = await fetch(
-      `${server}?search=${formInputs.searchTerm}&key=${API_KEY}`
-    );
-    console.log(res);
-    res = await res.json();
-
-    setSearchResults(res.results);
-    console.log(res);
-  };
+function Search({ results }) {
+  // console.log('results', results);
   return (
     <Box sx={{ flexGrow: 1 }}>
-      {/* <SearchBar> */}
-      {/* <SearchIconWrapper> */}
-      {/* <SearchIcon /> */}
-      {/* </SearchIconWrapper> */}
-      {/* <StyledInputBase
+      <SearchBar>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
           placeholder="Search…"
           inputProps={{ 'aria-label': 'search' }}
-          onKeyPress={handleInput}
+          // onKeyPress={handleInput}
           // value={searchTerm}
-        /> */}
-      <form onSubmit={search}>
-        <input
-          className="search"
-          name="searchTerm"
-          value={searchTerm}
-          onChange={handleInput}
-          type="text"
-          required
         />
-        <button>search</button>
-      </form>
-      {/* </SearchBar> */}
+      </SearchBar>
     </Box>
   );
 }
 
-export default search;
+export default Search;
 
-// export async function getStaticProps(context) {
-//   const res = await axios(`${server}?search=${context}&key=${API_KEY}`);
-//   const game = res.data;
+export async function getStaticProps(context) {
+  const useDummyData = false;
+  console.log('context', context);
 
-//   // console.log(game);
-//   return {
-//     props: {
-//       game,
-//       // allReviewsGame: JSON.parse(JSON.stringify(allReviewsGame)),
-//     },
-//   };
-// }
+  const res = await axios(`${server}?search=${context.query}&key=${API_KEY}`);
+  const game = res.data;
+
+  // console.log(game);
+  return {
+    props: {
+      game,
+      // allReviewsGame: JSON.parse(JSON.stringify(allReviewsGame)),
+    },
+  };
+}

@@ -1,12 +1,67 @@
 import HeaderItem from './HeaderItem';
-import { HomeIcon, LoginIcon, LogoutIcon, SearchIcon, UserIcon } from '@heroicons/react/outline';
+import {
+  HomeIcon,
+  LoginIcon,
+  LogoutIcon,
+  SearchIcon,
+  UserIcon,
+} from '@heroicons/react/outline';
 import mochigames from '../public/mochigames.png';
+import SearchIconMUI from '@mui/icons-material/Search';
 import Image from 'next/image';
 import Link from 'next/link';
 import AuthModal from './AuthModal';
 import { useState } from 'react';
-import {SessionProvider, signOut, useSession} from 'next-auth/react';
+import { SessionProvider, signOut, useSession } from 'next-auth/react';
 import saveUser from './SaveUser';
+import { Fragment, useState, useRef } from 'react';
+import { SessionProvider, signOut, useSession } from 'next-auth/react';
+import * as React from 'react';
+import { styled, alpha } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import { useRouter } from 'next/router';
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
+}));
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -15,15 +70,27 @@ function Header() {
   const session = useSession();
   const auth = session.status;
   console.log('session', session.data);
+  const searchInputRef = useRef(null);
+  const router = useRouter();
+
+  const search = (e) => {
+    e.preventDefault();
+    const searchTerm = searchInputRef.current.value;
+    console.log(searchInputRef.current.value);
+
+    // if (!searchTerm) return;
+
+    router.push(`/search?term=${searchTerm}`);
+  };
 
   async function saveUser(user) {
     const response = await fetch('/api/saveUser', {
       method: 'POST',
-      body: JSON.stringify(user)
-    })
-    return await response.json()
+      body: JSON.stringify(user),
+    });
+    return await response.json();
   }
- 
+
   return (
     <>
       <SessionProvider session={session}>
@@ -34,23 +101,37 @@ function Header() {
                 <HeaderItem title="HOME" Icon={HomeIcon} />
               </a>
             </Link>
-            <Link href="/search">
-              <a>
-                <HeaderItem title="SEARCH" Icon={SearchIcon} />
-              </a>
-            </Link>
+            {/* <Link href="/search"> */}
+            <a>
+              <HeaderItem title="SEARCH" Icon={SearchIcon} />
+              <Search>
+                <SearchIconWrapper></SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  // inputProps={{ 'aria-label': 'search' }}
+                  inputRef={searchInputRef}
+                />
+                <SearchIconMUI onClick={search} />
+              </Search>
+            </a>
+            {/* </Link> */}
             <Link href="/account">
               <a>
                 <HeaderItem title="ACCOUNT" Icon={UserIcon} />
               </a>
             </Link>
             <nav>
-              { auth === 'unauthenticated' ? (
-                  <button onClick={handleOpen}> <HeaderItem title="LOG IN" Icon={LoginIcon} /> </button>
-                ) : (
-                <button onClick={signOut}> <HeaderItem title="LOG OUT"  Icon={LogoutIcon} /> </button>
-                )
-              }
+              {auth === 'unauthenticated' ? (
+                <button onClick={handleOpen}>
+                  {' '}
+                  <HeaderItem title="LOG IN" Icon={LoginIcon} />{' '}
+                </button>
+              ) : (
+                <button onClick={signOut}>
+                  {' '}
+                  <HeaderItem title="LOG OUT" Icon={LogoutIcon} />{' '}
+                </button>
+              )}
             </nav>
           </div>
           <Link href="/">
@@ -59,17 +140,23 @@ function Header() {
               <Image src={mochigames.src} width={'150%'} height={'100%'} />
             </a>
           </Link>
-          { auth === 'authenticated' ? (<button onClick={() => {saveUser(session.data.user)}}>save user</button>) : null
-          }
+          {auth === 'authenticated' ? (
+            <button
+              onClick={() => {
+                saveUser(session.data.user);
+              }}
+            >
+              save user
+            </button>
+          ) : null}
         </header>
-        <AuthModal open={open} close={handleClose}/>
+        <AuthModal open={open} close={handleClose} />
       </SessionProvider>
     </>
   );
 }
 
 function showAuth(log) {
-  if (log = open)
-  return
+  if ((log = open)) return;
 }
 export default Header;
