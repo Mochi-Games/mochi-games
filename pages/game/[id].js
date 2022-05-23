@@ -92,6 +92,7 @@ function GamePage({ game, allReviewsGame }) {
   //   };
 
   // console.log('gamepageresults', game);
+  // console.log('reviews', allReviewsGame);
 
   return (
     <>
@@ -231,10 +232,10 @@ function GamePage({ game, allReviewsGame }) {
           )}
         </div>
         <Container sx={{ padding: 20 }}>
-          <Typography variant="h5">Recent Reviews:</Typography>
+          {/* <Typography variant="h5">Recent Reviews:</Typography>
           {allReviewsGame.map((review, i) => (
             <ReviewComp review={review} key={i} />
-          ))}
+          ))} */}
         </Container>
       </SessionProvider>
     </>
