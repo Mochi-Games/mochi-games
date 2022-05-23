@@ -32,7 +32,7 @@ const prisma = new PrismaClient();
 //     'linear-gradient(to right, #14181c 0%, rgba(255, 255, 255, 0) 40%), linear-gradient(to left, #14181c 0%, rgba(255, 255, 255, 0) 40%), linear-gradient(to top, #14181c 30%, rgba(255, 255, 255, 0) 80%)',
 // };
 
-function GamePage({ game, allReviewsGame }) {
+function GamePage({ game, allGameReviews }) {
   const [value, setValue] = useState(0);
   const [formData, setFormData] = useState({});
   const session = useSession();
@@ -59,7 +59,6 @@ function GamePage({ game, allReviewsGame }) {
   async function saveReview(e) {
     e.preventDefault();
     console.log(formData);
-    // setMovies([...movies, formData]);
     const response = await fetch('/api/review', {
       method: 'POST',
       body: JSON.stringify(formData),
@@ -92,6 +91,7 @@ function GamePage({ game, allReviewsGame }) {
   //   };
 
   // console.log('gamepageresults', game);
+  console.log('review', allGameReviews);
 
   return (
     <>
@@ -232,7 +232,7 @@ function GamePage({ game, allReviewsGame }) {
         </div>
         <Container sx={{ padding: 20 }}>
           <Typography variant="h5">Recent Reviews:</Typography>
-          {allReviewsGame.map((review, i) => (
+          {allGameReviews.map((review, i) => (
             <ReviewComp review={review} key={i} />
           ))}
         </Container>
@@ -247,7 +247,7 @@ export async function getStaticProps(context) {
   const { id } = context.params;
   const res = await axios(`${server}/${id}?key=${API_KEY}`);
   const game = res.data;
-  const allReviewsGame = await prisma.review.findMany({
+  const allGameReviews = await prisma.review.findMany({
     // orderBy: {
     //   createdAt: 'desc',
     // },
@@ -259,11 +259,11 @@ export async function getStaticProps(context) {
     // },
     //include: user
   });
-  // console.log('allreviews', allReviewsGame);
+  console.log('allreviews', allGameReviews);
   return {
     props: {
       game,
-      allReviewsGame: JSON.parse(JSON.stringify(allReviewsGame)),
+      allGameReviews: JSON.parse(JSON.stringify(allGameReviews)),
     },
   };
 }
