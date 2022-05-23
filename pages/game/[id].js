@@ -249,9 +249,6 @@ export async function getStaticProps(context) {
   const res = await axios(`${server}/${id}?key=${API_KEY}`);
   const game = res.data;
   const allGameReviews = await prisma.review.findMany({
-    // orderBy: {
-    //   createdAt: 'desc',
-    // },
     where: { gameId: game.id },
     // include: {
     //   select: {
@@ -270,7 +267,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const res = await axios(`${server}?key=${API_KEY}&page_size=6`);
+  const res = await axios(`${server}?key=${API_KEY}`);
   const games = res.data.results;
   const ids = games.map((game) => game.id);
   const paths = ids.map((id) => ({ params: { id: id.toString() } }));

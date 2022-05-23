@@ -74,13 +74,15 @@ function Header() {
   const router = useRouter();
 
   const search = (e) => {
-    e.preventDefault();
-    const searchTerm = searchInputRef.current.value;
-    console.log(searchInputRef.current.value);
+    // e.preventDefault();
+    if (e.key === 'Enter') {
+      const searchTerm = searchInputRef.current.value;
+      console.log(searchInputRef.current.value);
 
-    // if (!searchTerm) return;
+      if (!searchTerm) return;
 
-    router.push(`/search?term=${searchTerm}`);
+      router.push(`/search?term=${searchTerm}`);
+    }
   };
 
   async function saveUser(user) {
@@ -98,23 +100,32 @@ function Header() {
           <div className="flex flex-grow justify-evenly max-w-2xl">
             <Link href="/">
               <a>
-                <HeaderItem title="HOME" Icon={HomeIcon} />
+                {' '}
+                <Image src={mochigames.src} width={200} height={100} />
               </a>
             </Link>
             {/* <Link href="/search"> */}
             <a>
-              <HeaderItem title="SEARCH" Icon={SearchIcon} />
+              {/* <HeaderItem title="SEARCH" Icon={SearchIcon} /> */}
               <Search>
                 <SearchIconWrapper></SearchIconWrapper>
                 <StyledInputBase
                   placeholder="Search…"
                   // inputProps={{ 'aria-label': 'search' }}
                   inputRef={searchInputRef}
+                  onKeyPress={search}
                 />
                 <SearchIconMUI onClick={search} />
               </Search>
             </a>
             {/* </Link> */}
+          </div>
+          <div className="flex flex-grow justify-evenly max-w-2xl">
+            <Link href="/">
+              <a>
+                <HeaderItem title="HOME" Icon={HomeIcon} />
+              </a>
+            </Link>
             <Link href="/account">
               <a>
                 <HeaderItem title="ACCOUNT" Icon={UserIcon} />
