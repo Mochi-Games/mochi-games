@@ -29,7 +29,7 @@ model Review {
   updatedAt DateTime @updatedAt
   rating    Int
   comment   String
-  userId    String?
+  userId    String
   gameId    Int?
   favorite  Boolean?
   played    Boolean?

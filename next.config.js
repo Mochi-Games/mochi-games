@@ -5,3 +5,5 @@ const nextConfig = {
     domains: ['media.rawg.io', 'static-cdn.jtvnw.net/'],
   },
 };
+
+module.exports = nextConfig;

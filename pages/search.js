@@ -4,8 +4,16 @@ import axios from 'axios';
 import Response from '../Response';
 import { useRouter } from 'next/router';
 import SearchResults from '../components/SearchResults';
+import Pagination from '@mui/material/Pagination';
+import { styled } from '@mui/material/styles';
 
 const API_KEY = process.env.RAWG_API_KEY;
+
+const CustomPaginator = styled(Pagination)`
+  .MuiPagination-text {
+    color: #fff;
+  }
+`;
 
 function Search({ results }) {
   console.log('results', results);
@@ -17,6 +25,7 @@ function Search({ results }) {
       </Head>
       <p>Showing results for {router.query.term}</p>
       <SearchResults results={results} />
+      <CustomPaginator color="primary" count={10} />
     </>
   );
 }

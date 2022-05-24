@@ -245,7 +245,7 @@ function GamePage({ game, allGameReviews }) {
 
 export default GamePage;
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const { id } = context.params;
   const res = await axios(`${server}/${id}?key=${API_KEY}`);
   const game = res.data;
@@ -270,14 +270,14 @@ export async function getStaticProps(context) {
   };
 }
 
-export async function getStaticPaths() {
-  const res = await axios(`${server}?key=${API_KEY}&page_size=6`);
-  const games = res.data.results;
-  const ids = games.map((game) => game.id);
-  const paths = ids.map((id) => ({ params: { id: id.toString() } }));
+// export async function getStaticPaths() {
+//   const res = await axios(`${server}?key=${API_KEY}&page_size=6`);
+//   const games = res.data.results;
+//   const ids = games.map((game) => game.id);
+//   const paths = ids.map((id) => ({ params: { id: id.toString() } }));
 
-  return {
-    paths,
-    fallback: false,
-  };
-}
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
