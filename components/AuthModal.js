@@ -4,6 +4,8 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
+// import twitchlogo from './public/twitchlogo.png'
+
 
 const signInWithTwitch = async () => {
   toast.loading('Redirecting...');
@@ -42,7 +44,8 @@ export default function AuthModal({open, close}) {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
+            <Typography id="modal-modal-title" variant="h6" component="h2" >
+              
               <Button onClick={signInWithTwitch}>Twitch</Button>
               <br></br>
               <Button onClick={signInWithGoogle}>Google</Button>

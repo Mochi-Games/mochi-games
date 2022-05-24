@@ -2,21 +2,36 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Mochi Games is a social networking board for reviewing and sharing video games. See what your friends are playing and let them know what you think of the games you have played!
 
-```bash
-npm run dev
+This app uses Next JS. 
+
+Install NextJS:
+
+```npx create-next-app@latest
 # or
-yarn dev
-```
+yarn create next-app
+# or
+pnpm create next-app```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You will also need the following dependencies:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+React-hot-toast for sick loading bars and miscellaneous notifications:
+```npm install react-hot-toast
+# or
+yarn add react-hot-toast```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Material UI:
+```npm install @mui/material @emotion/react @emotion/styled```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Prisma:
+```npm install prisma --save-dev```
+
+## Game Time
+
+Log in with your Twitch or Google account.
+See a game you've played before? Leave a rating and review so others know what you think of it!
+Follow your friends to see what they think of a game.
 
 ## Learn More
 

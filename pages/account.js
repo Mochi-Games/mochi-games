@@ -19,6 +19,7 @@ export default function accountPage() {
     if (promise == null) {setPromise(temp)}}
   };
   fetchedData();
+  if (session) {
   return (
     <>
       <div>
@@ -26,5 +27,12 @@ export default function accountPage() {
       </div>
     </>
   )
-
+  } else {
+    
+    return (
+      <>
+        <h1>Log in to view this page!</h1>
+      </>
+    )
+  }
 }

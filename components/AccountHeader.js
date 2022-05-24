@@ -1,37 +1,33 @@
-// import { getSession, useSession } from "next-auth/react";
-// import { useState } from "react";
-// import fetchUserInfo from "./FetchUserInfo";
+import { getSession, useSession } from "next-auth/react";
+import DisplayFavoriteGames from "./FavoriteGames";
+
 
 
 
 export default function AccountPage({userInfo}) {
-  // const { data: session } = useSession()
-  // const [promise, setPromise] = useState(null);
+
   console.log(userInfo);
   const image = userInfo.image;
   const name = userInfo.name;
-  // const fetchedData = async () => { if (session) {
-  //   let temp = await fetchUserInfo(session.user.email);
-  //   setImage(temp.data.image);
-  //   setName(temp.data.name);
-  //   //pass review, follower from this page to other components.
-  //   if (promise == null) {setPromise(temp)}}
-  // };
-  // fetchedData();
-  // console.log('promise', promise);
-  // console.log('image', image);
-  // if (session) {
     return(
       <>
-      <div className="flex justify-items-center border">
-        <img src={image} className='rounded-full'/>
-        <>{/* display stats - friends, games reviewed, etc. */}</>
-        <>{/* account navbar here */}</>
+      <div className="border">
+        <div><img src={image} className='rounded-full'/>
           <div className="">
             Welcome {name}! 
             {/* component for row display of recently reviewed games */}
           </div>
-          <div></div>
+        </div>
+        <div className="">
+          <ul className="flex flex-row justify-center space-x-12 border">
+            <li><button>Profile</button></li>
+            <li>Games</li>
+            <li>Likes</li>
+            <li>Reviews</li>
+            <li>Network</li>
+          </ul>
+        </div>
+        <div></div>
         </div>
       </>
     )
