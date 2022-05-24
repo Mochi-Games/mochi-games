@@ -11,8 +11,6 @@ import SearchIconMUI from '@mui/icons-material/Search';
 import Image from 'next/image';
 import Link from 'next/link';
 import AuthModal from './AuthModal';
-import { useState } from 'react';
-import { SessionProvider, signOut, useSession } from 'next-auth/react';
 import saveUser from './SaveUser';
 import { Fragment, useState, useRef } from 'react';
 import { SessionProvider, signOut, useSession } from 'next-auth/react';
