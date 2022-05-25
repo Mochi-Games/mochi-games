@@ -65,6 +65,10 @@ function GamePage({ game, allGameReviews }) {
     });
     return await response.json();
   }
+
+  function refreshPage() {
+    window.location.reload(false);
+  }
   //   const [comment, setComment] = useState('');
   //   const [rating, setRating] = useState('');
 
@@ -217,10 +221,13 @@ function GamePage({ game, allGameReviews }) {
                         comment: e.target.value,
                         gameId: game.id,
                         email: session.data.user.email,
+                        id: session.data.user.id,
                       })
                     }
                   />
-                  <button type="submit">Add review</button>
+                  <button type="submit" onClick={refreshPage}>
+                    Add review
+                  </button>
                 </form>
               </Box>
             </Modal>
