@@ -17,7 +17,7 @@ model User {
   email     String     @unique
   name      String
   image     String
-  // reviews   Review[]
+  reviews   Review[]
   playlists Playlist[]
   followers Follows[]  @relation("follower")
   following Follows[]  @relation("following")
@@ -33,6 +33,7 @@ model Review {
   gameId    Int?
   favorite  Boolean?
   played    Boolean?
+  user      User     @relation(fields: [userId], references: [id])
   // game      Game?    @relation(fields: [gameId], references: [id])
 }
 
