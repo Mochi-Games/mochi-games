@@ -7,9 +7,22 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export default async (req, res) => {
-  const data = JSON.parse(req.body);
-  const result = await prisma.review.create({
-    data,
+  const getUser = await prisma.user.findFirst({
+    where: {
+      email: req.body.email,
+    },
   });
-  res.json(result);
+  console.log('userObj', getUser);
+  const data = JSON.parse(req.body);
+  console.log('data', data);
+  const result = await prisma.review.create({
+    data: {
+      rating: data.rating,
+      comment: data.comment,
+      gameId: data.gameId,
+      userId: getUser.id,
+    },
+  });
+
+  return res.json(result);
 };

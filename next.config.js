@@ -2,8 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['media.rawg.io'], ['static-cdn.jtvnw.net/']
-
+    domains: ['media.rawg.io', 'static-cdn.jtvnw.net/'],
   },
 };
 
