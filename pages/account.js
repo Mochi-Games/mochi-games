@@ -13,8 +13,12 @@ export default function accountPage() {
   const userInfo = {image, name}
   const fetchedData = async () => { if (session) {
     let temp = await fetchUserInfo(session.user.email);
-    setImage(temp.data.image);
-    setName(temp.data.name);
+    if (temp.data != null) {
+      console.log('temp', temp);
+      setImage(temp.data.image);
+      setName(temp.data.name);
+    }
+    
     //pass review, follower from this page to other components.
     if (promise == null) {setPromise(temp)}}
   };

@@ -6,7 +6,6 @@ import DisplayFavoriteGames from "./FavoriteGames";
 
 export default function AccountPage({userInfo}) {
 
-  console.log(userInfo);
   const image = userInfo.image;
   const name = userInfo.name;
     return(
