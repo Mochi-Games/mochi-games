@@ -99,7 +99,12 @@ function Header() {
             <Link href="/">
               <a>
                 {' '}
-                <Image src={mochigames.src} width={200} height={100} />
+                <Image
+                  src={mochigames.src}
+                  width={200}
+                  height={100}
+                  alt="mochi-games-logo"
+                />
               </a>
             </Link>
             {/* <Link href="/search"> */}
@@ -143,12 +148,6 @@ function Header() {
               )}
             </nav>
           </div>
-          <Link href="/">
-            <a>
-              {' '}
-              <Image src={mochigames.src} width={'150%'} height={'100%'} />
-            </a>
-          </Link>
           {auth === 'authenticated' ? (
             <button
               onClick={() => {

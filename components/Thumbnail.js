@@ -13,6 +13,7 @@ function Thumbnail({ result }) {
             src={result.background_image}
             height={720}
             width={1280}
+            alt={result.slug}
           />
           <h2 className="opacity-0 group-hover:opacity-100 tracking-widest">
             {result.name}
