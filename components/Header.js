@@ -148,6 +148,7 @@ function Header() {
               )}
             </nav>
           </div>
+
           {auth === 'authenticated' ? (
             <button
               onClick={() => {
