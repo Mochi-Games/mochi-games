@@ -1,7 +1,6 @@
 import {
   Container,
   Rating,
-  TextField,
   Typography,
   Card,
   CardMedia,
@@ -14,7 +13,6 @@ import {
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CreateIcon from '@mui/icons-material/Create';
-import CheckIcon from '@mui/icons-material/Check';
 import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
 import { server } from '../../utils';
@@ -26,11 +24,6 @@ import ReviewComp from '../../components/ReviewComp';
 const API_KEY = process.env.RAWG_API_KEY;
 
 const prisma = new PrismaClient();
-
-// const styles = {
-//   background:
-//     'linear-gradient(to right, #14181c 0%, rgba(255, 255, 255, 0) 40%), linear-gradient(to left, #14181c 0%, rgba(255, 255, 255, 0) 40%), linear-gradient(to top, #14181c 30%, rgba(255, 255, 255, 0) 80%)',
-// };
 
 function GamePage({ game, allGameReviews }) {
   const [value, setValue] = useState(0);
@@ -257,16 +250,7 @@ export async function getServerSideProps(context) {
   const res = await axios(`${server}/${id}?key=${API_KEY}`);
   const game = res.data;
   const allGameReviews = await prisma.review.findMany({
-    // orderBy: {
-    //   createdAt: 'desc',
-    // },
     where: { gameId: game.id },
-    // include: {
-    //   select: {
-    //     user: true,
-    //   },
-    // },
-    //include: user
   });
   console.log('allreviews', allGameReviews);
   return {
@@ -276,15 +260,3 @@ export async function getServerSideProps(context) {
     },
   };
 }
-
-// export async function getStaticPaths() {
-//   const res = await axios(`${server}?key=${API_KEY}&page_size=6`);
-//   const games = res.data.results;
-//   const ids = games.map((game) => game.id);
-//   const paths = ids.map((id) => ({ params: { id: id.toString() } }));
-
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
