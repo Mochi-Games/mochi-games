@@ -1,64 +1,49 @@
-import { styled, alpha } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
-import { Box, Typography } from '@mui/material';
+import Head from 'next/head';
+import { server } from '../utils';
+import axios from 'axios';
+import Response from '../Response';
+import { useRouter } from 'next/router';
+import SearchResults from '../components/SearchResults';
+import Pagination from '@mui/material/Pagination';
+import { styled } from '@mui/material/styles';
 
-const SearchBar = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.primary.light, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.primary.main, 0.25),
-  },
-  marginRight: 700,
-  marginLeft: 0,
-  marginTop: 20,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
+const API_KEY = process.env.RAWG_API_KEY;
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
+const CustomPaginator = styled(Pagination)`
+  .MuiPagination-text {
+    color: #fff;
+  }
+`;
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-}));
-
-function search() {
+function Search({ results }) {
+  console.log('results', results);
+  const router = useRouter();
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <SearchBar>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search…"
-          inputProps={{ 'aria-label': 'search' }}
-          //   onKeyPress={handleKeyPress}
-        />
-      </SearchBar>
-    </Box>
+    <>
+      <Head>
+        <title>{router.query.term} - Search </title>
+      </Head>
+      <p>Showing results for {router.query.term}</p>
+      <SearchResults results={results} />
+      <CustomPaginator color="primary" count={10} />
+    </>
   );
 }
 
-export default search;
+export default Search;
+
+export async function getServerSideProps(context) {
+  const useDummyData = false;
+  console.log('context', context);
+
+  const res = useDummyData
+    ? Response
+    : await axios(`${server}?search=${context.query.term}&key=${API_KEY}`);
+  const results = res.data;
+
+  return {
+    props: {
+      results,
+    },
+  };
+}

@@ -5,7 +5,7 @@ import Link from 'next/link';
 function Thumbnail({ result }) {
   // console.log('result', result);
   return (
-    <Link href={`/game/${result.id}`}>
+    <Link href={`/game/[id]`} as={`/game/${result.slug}`}>
       <div className="w-full rounded items-center cursor-pointer group hover:text-white">
         <Paper>
           <Image

@@ -1,10 +1,18 @@
 import HeaderItem from './HeaderItem';
-import { HomeIcon, LoginIcon, LogoutIcon, SearchIcon, UserIcon } from '@heroicons/react/outline';
+import {
+  HomeIcon,
+  LoginIcon,
+  LogoutIcon,
+  SearchIcon,
+  UserIcon,
+} from '@heroicons/react/outline';
 import mochigames from '../public/mochigames.png';
+import SearchIconMUI from '@mui/icons-material/Search';
 import Image from 'next/image';
 import Link from 'next/link';
 import AuthModal from './AuthModal';
-import { Fragment, useState, useEffect, useRef } from 'react';
+import saveUser from './SaveUser';
+import { Fragment, useState, use Effect, useRef } from 'react';
 import { SessionProvider, signOut, useSession } from 'next-auth/react';
 import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
@@ -54,6 +62,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Header() {
+  const [user, setUser] = useState(null);
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState(null);
   const handleOpen = () => setOpen(true);
@@ -64,7 +73,6 @@ function Header() {
   // console.log('session', session.data);
   const searchInputRef = useRef(null);
   const router = useRouter();
-  
 
   const search = (e) => {
     // e.preventDefault();
@@ -81,11 +89,26 @@ function Header() {
   async function saveUser(user) {
     const response = await fetch('/api/saveUser', {
       method: 'POST',
-      body: JSON.stringify(user)
-    })
-    return await response.json()
+      body: JSON.stringify(user),
+    });
+    return await response.json();
   }
- 
+
+  useEffect(() => {
+    if (auth === 'authenticated') {
+      setUser(session.data.user);
+    } else {
+      setUser(null)
+    }
+    }, [auth])
+
+  useEffect( () => {
+    if (user) {
+      saveUser(user)
+    }
+  }, [user])
+  // console.log('user', user);
+
   return (
     <>
       <SessionProvider session={session}>
@@ -93,12 +116,30 @@ function Header() {
           <div className="flex flex-grow justify-evenly max-w-2xl">
             <Link href="/">
               <a>
-                <HeaderItem title="HOME" Icon={HomeIcon} />
+                {' '}
+                <Image src={mochigames.src} width={200} height={100} />
               </a>
             </Link>
-            <Link href="/search">
+            {/* <Link href="/search"> */}
+            <a>
+              {/* <HeaderItem title="SEARCH" Icon={SearchIcon} /> */}
+              <Search>
+                <SearchIconWrapper></SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  // inputProps={{ 'aria-label': 'search' }}
+                  inputRef={searchInputRef}
+                  onKeyPress={search}
+                />
+                <SearchIconMUI onClick={search} />
+              </Search>
+            </a>
+            {/* </Link> */}
+          </div>
+          <div className="flex flex-grow justify-evenly max-w-2xl">
+            <Link href="/">
               <a>
-                <HeaderItem title="SEARCH" Icon={SearchIcon} />
+                <HeaderItem title="HOME" Icon={HomeIcon} />
               </a>
             </Link>
             { user && <Link href={`/account/${user.name}`}>
@@ -107,14 +148,25 @@ function Header() {
               </a>
             </Link> }
             <nav>
-              { auth === 'unauthenticated' ? (
-                  <button onClick={handleOpen}> <HeaderItem title="LOG IN" Icon={LoginIcon} /> </button>
-                ) : (
-                <button onClick={signOut}> <HeaderItem title="LOG OUT"  Icon={LogoutIcon} /> </button>
-                )
-              }
+              {auth === 'unauthenticated' ? (
+                <button onClick={handleOpen}>
+                  {' '}
+                  <HeaderItem title="LOG IN" Icon={LoginIcon} />{' '}
+                </button>
+              ) : (
+                <button onClick={signOut}>
+                  {' '}
+                  <HeaderItem title="LOG OUT" Icon={LogoutIcon} />{' '}
+                </button>
+              )}
             </nav>
           </div>
+          <Link href="/">
+            <a>
+              {' '}
+              <Image src={mochigames.src} width={'150%'} height={'100%'} />
+            </a>
+          </Link>
           {/* {auth === 'authenticated' ? (
             <button
               onClick={() => {
@@ -125,15 +177,13 @@ function Header() {
             </button>
           ) : null} */}
         </header>
-        <AuthModal open={open} close={handleClose}/>
+        <AuthModal open={open} close={handleClose} />
       </SessionProvider>
     </>
   );
 }
 
-function showAuth(log) {
-  if (log = open)
-  return
-}
-
+// function showAuth(log) {
+//   if ((log = open)) return;
+// }
 export default Header;

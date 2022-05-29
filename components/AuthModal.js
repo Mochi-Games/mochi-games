@@ -36,7 +36,6 @@ export default function AuthModal({open, close}) {
 
   const modal = (
     <div>
-      {/* <SessionProvider session={session}> */}
         <Modal
           open = {open}
           onClose={close}
@@ -47,17 +46,15 @@ export default function AuthModal({open, close}) {
             <Typography id="modal-modal-title" variant="h6" component="h2" >
               
               <Button onClick={signInWithTwitch}>Twitch</Button>
-              {/* <br></br>
-              <Button onClick={signInWithGoogle}>Google</Button> */}
+              <br></br>
+              {/* <Button onClick={signInWithGoogle}>Google</Button> */}
             </Typography>
-            {/* <Typography> */}
-              {/* <Button onClick={} */}
-            {/* </Typography> */}
           </Box>
         </Modal>
-      {/* </SessionProvider> */}
     </div>
   );
+
+  
 
 return modal
 
