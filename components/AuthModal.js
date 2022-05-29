@@ -12,10 +12,10 @@ const signInWithTwitch = async () => {
   await signIn('twitch');
 }
 
-const signInWithGoogle = () => {
-  toast.loading('Redirecting...');
-  signIn('google');
-}
+// const signInWithGoogle = () => {
+//   toast.loading('Redirecting...');
+//   signIn('google');
+// }
 
 const style = {
   position: 'absolute',
@@ -47,8 +47,8 @@ export default function AuthModal({open, close}) {
             <Typography id="modal-modal-title" variant="h6" component="h2" >
               
               <Button onClick={signInWithTwitch}>Twitch</Button>
-              <br></br>
-              <Button onClick={signInWithGoogle}>Google</Button>
+              {/* <br></br>
+              <Button onClick={signInWithGoogle}>Google</Button> */}
             </Typography>
             {/* <Typography> */}
               {/* <Button onClick={} */}

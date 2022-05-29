@@ -10,11 +10,7 @@ export default function AccountPage({userInfo}) {
   const [showGames, setShowGames] = useState(false);
   const [showReviews, setShowReviews] = useState(false);
 
-<<<<<<< Updated upstream
-  console.log(userInfo);
-=======
   const id = userInfo.id;
->>>>>>> Stashed changes
   const image = userInfo.image;
   const name = userInfo.name;
 

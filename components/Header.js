@@ -4,11 +4,6 @@ import mochigames from '../public/mochigames.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import AuthModal from './AuthModal';
-<<<<<<< Updated upstream
-import { useState } from 'react';
-import {SessionProvider, signOut, useSession} from 'next-auth/react';
-import saveUser from './SaveUser';
-=======
 import { Fragment, useState, useEffect, useRef } from 'react';
 import { SessionProvider, signOut, useSession } from 'next-auth/react';
 import * as React from 'react';
@@ -57,18 +52,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
->>>>>>> Stashed changes
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   
   const session = useSession();
   const auth = session.status;
-<<<<<<< Updated upstream
-  console.log('session', session.data);
-=======
   // console.log('session', session.data);
   const searchInputRef = useRef(null);
   const router = useRouter();
@@ -85,7 +77,6 @@ function Header() {
       router.push(`/search?term=${searchTerm}`);
     }
   };
->>>>>>> Stashed changes
 
   async function saveUser(user) {
     const response = await fetch('/api/saveUser', {
@@ -124,16 +115,6 @@ function Header() {
               }
             </nav>
           </div>
-<<<<<<< Updated upstream
-          <Link href="/">
-            <a>
-              {' '}
-              <Image src={mochigames.src} width={'150%'} height={'100%'} />
-            </a>
-          </Link>
-          { auth === 'authenticated' ? (<button onClick={() => {saveUser(session.data.user)}}>save user</button>) : null
-          }
-=======
           {/* {auth === 'authenticated' ? (
             <button
               onClick={() => {
@@ -143,7 +124,6 @@ function Header() {
               save user
             </button>
           ) : null} */}
->>>>>>> Stashed changes
         </header>
         <AuthModal open={open} close={handleClose}/>
       </SessionProvider>
@@ -155,4 +135,5 @@ function showAuth(log) {
   if (log = open)
   return
 }
+
 export default Header;

@@ -15,10 +15,6 @@ export default function accountPage() {
   const userInfo = {image, name, id}
   const fetchedData = async () => { if (session) {
     let temp = await fetchUserInfo(session.user.email);
-<<<<<<< Updated upstream:pages/account.js
-    setImage(temp.data.image);
-    setName(temp.data.name);
-=======
     if (temp.data != null) {
       // console.log('temp', temp);
       setId(temp.data.id);
@@ -26,7 +22,6 @@ export default function accountPage() {
       setName(temp.data.name);
     }
     
->>>>>>> Stashed changes:pages/account/[name].js
     //pass review, follower from this page to other components.
     if (promise == null) {setPromise(temp)}}
   };
