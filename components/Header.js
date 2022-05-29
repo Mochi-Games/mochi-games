@@ -4,17 +4,88 @@ import mochigames from '../public/mochigames.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import AuthModal from './AuthModal';
+<<<<<<< Updated upstream
 import { useState } from 'react';
 import {SessionProvider, signOut, useSession} from 'next-auth/react';
 import saveUser from './SaveUser';
+=======
+import { Fragment, useState, useEffect, useRef } from 'react';
+import { SessionProvider, signOut, useSession } from 'next-auth/react';
+import * as React from 'react';
+import { styled, alpha } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import { useRouter } from 'next/router';
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
+}));
+>>>>>>> Stashed changes
 
 function Header() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  
   const session = useSession();
   const auth = session.status;
+<<<<<<< Updated upstream
   console.log('session', session.data);
+=======
+  // console.log('session', session.data);
+  const searchInputRef = useRef(null);
+  const router = useRouter();
+  
+
+  const search = (e) => {
+    // e.preventDefault();
+    if (e.key === 'Enter') {
+      const searchTerm = searchInputRef.current.value;
+      console.log(searchInputRef.current.value);
+
+      if (!searchTerm) return;
+
+      router.push(`/search?term=${searchTerm}`);
+    }
+  };
+>>>>>>> Stashed changes
 
   async function saveUser(user) {
     const response = await fetch('/api/saveUser', {
@@ -39,11 +110,11 @@ function Header() {
                 <HeaderItem title="SEARCH" Icon={SearchIcon} />
               </a>
             </Link>
-            <Link href="/account">
+            { user && <Link href={`/account/${user.name}`}>
               <a>
-                <HeaderItem title="ACCOUNT" Icon={UserIcon} />
+                <HeaderItem title="ACCOUNT" Icon={UserIcon}/>
               </a>
-            </Link>
+            </Link> }
             <nav>
               { auth === 'unauthenticated' ? (
                   <button onClick={handleOpen}> <HeaderItem title="LOG IN" Icon={LoginIcon} /> </button>
@@ -53,6 +124,7 @@ function Header() {
               }
             </nav>
           </div>
+<<<<<<< Updated upstream
           <Link href="/">
             <a>
               {' '}
@@ -61,6 +133,17 @@ function Header() {
           </Link>
           { auth === 'authenticated' ? (<button onClick={() => {saveUser(session.data.user)}}>save user</button>) : null
           }
+=======
+          {/* {auth === 'authenticated' ? (
+            <button
+              onClick={() => {
+                saveUser(session.data.user);
+              }}
+            >
+              save user
+            </button>
+          ) : null} */}
+>>>>>>> Stashed changes
         </header>
         <AuthModal open={open} close={handleClose}/>
       </SessionProvider>

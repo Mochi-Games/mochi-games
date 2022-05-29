@@ -1,5 +1,4 @@
 import axios from "axios"
-// import { SessionProvider, useSession } from "next-auth/react"
 
 export default async function fetchUserInfo(email) {
   try {

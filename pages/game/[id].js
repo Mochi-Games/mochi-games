@@ -36,8 +36,12 @@ function GamePage({ game, allReviewsGame }) {
 
   async function saveReview(e) {
     e.preventDefault();
+<<<<<<< Updated upstream
     console.log(formData);
     // setMovies([...movies, formData]);
+=======
+    console.log('formdata', formData);
+>>>>>>> Stashed changes
     const response = await fetch('/api/review', {
       method: 'POST',
       body: JSON.stringify(formData),
@@ -149,7 +153,15 @@ function GamePage({ game, allReviewsGame }) {
               <button type="submit">Add review</button>
             </form>
           ) : (
+<<<<<<< Updated upstream
             <>Please log in to leave a review!</>
+=======
+            <Modal open={open} onClose={handleClose}>
+              <Box sx={style}>
+                <p>Log in to leave a review!</p>
+              </Box>
+            </Modal>
+>>>>>>> Stashed changes
           )}
         </div>
         <div>
@@ -169,6 +181,7 @@ export async function getStaticProps(context) {
   const { id } = context.params;
   const res = await axios(`${server}/${id}?key=${API_KEY}`);
   const game = res.data;
+<<<<<<< Updated upstream
   const allReviewsGame = await prisma.review.findMany({
     // orderBy: {
     //   createdAt: 'desc',
@@ -176,6 +189,11 @@ export async function getStaticProps(context) {
     where: { gameId: game.id },
   });
 
+=======
+  const allGameReviews = await prisma.review.findMany({
+    where: { gameId: game.id },
+  });
+>>>>>>> Stashed changes
   return {
     props: { game, allReviewsGame: JSON.parse(JSON.stringify(allReviewsGame)) },
   };
