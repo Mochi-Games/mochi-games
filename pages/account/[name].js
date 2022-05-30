@@ -3,6 +3,7 @@ import AccountHeader from "../../components/AccountHeader";
 import fetchUserInfo from "../../components/FetchUserInfo";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
+// import { prisma } from "@prisma/client";
 // import prisma from "../api/prisma";
 
 
@@ -15,8 +16,7 @@ export default function accountPage() {
   const userInfo = {image, name, id}
   const fetchedData = async () => { if (session) {
     let temp = await fetchUserInfo(session.user.email);
-    if (temp.data != null) {
-      // console.log('temp', temp);
+    if (temp != null) {
       setId(temp.data.id);
       setImage(temp.data.image);
       setName(temp.data.name);
@@ -60,6 +60,18 @@ export default function accountPage() {
 //   return {
 //     props: {
 //       reviews: JSON.parse(JSON.stringify(reviews))
+//     }
+//   }
+// }
+
+// export async function getServerSideProps() {
+//   const reviews = await prisma.reviews.findMany({
+//     where: {userId: }
+//   })
+//   console.log('reviews', reviews)
+//   return {
+//     props: {
+//       reviews 
 //     }
 //   }
 // }

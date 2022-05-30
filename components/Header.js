@@ -11,8 +11,7 @@ import SearchIconMUI from '@mui/icons-material/Search';
 import Image from 'next/image';
 import Link from 'next/link';
 import AuthModal from './AuthModal';
-import saveUser from './SaveUser';
-import { Fragment, useState, use Effect, useRef } from 'react';
+import { Fragment, useState, useEffect, useRef } from 'react';
 import { SessionProvider, signOut, useSession } from 'next-auth/react';
 import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
@@ -64,7 +63,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function Header() {
   const [user, setUser] = useState(null);
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState(null);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   
@@ -161,12 +159,6 @@ function Header() {
               )}
             </nav>
           </div>
-          <Link href="/">
-            <a>
-              {' '}
-              <Image src={mochigames.src} width={'150%'} height={'100%'} />
-            </a>
-          </Link>
           {/* {auth === 'authenticated' ? (
             <button
               onClick={() => {

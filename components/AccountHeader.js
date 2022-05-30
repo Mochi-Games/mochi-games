@@ -1,18 +1,41 @@
-import { ThirtyFpsSelect } from "@mui/icons-material";
 import { getSession } from "next-auth/react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import UserReviews from "./UserReviews";
+import UserGames from "./UserGames";
+import UserNetwork from "./UserNetwork";
 // import DisplayFavoriteGames from "./FavoriteGames";
 
 
 export default function AccountPage({userInfo}) {
-  const [showGames, setShowGames] = useState(false);
-  const [showReviews, setShowReviews] = useState(false);
-
   const id = userInfo.id;
   const image = userInfo.image;
   const name = userInfo.name;
+
+  const [showGames, setShowGames] = useState(false);
+  const [showReviews, setShowReviews] = useState(false);
+  const [showNetwork, setShowNetwork] = useState(false);
+
+  function displayProfileDefault() {
+    setShowGames(false);
+    setShowReviews(false);
+    setShowNetwork(false)
+  }
+  function displayGamesPlaylist() {
+    setShowGames(true);
+    setShowReviews(false);
+    setShowNetwork(false)
+  }
+  function displayUserReviews() {
+    setShowGames(false);
+    setShowReviews(true);
+    setShowNetwork(false)
+  }
+  function displayUserNetwork() {
+    setShowGames(false);
+    setShowReviews(false);
+    setShowNetwork(true)
+  }
 
   if (userInfo) {
     return(
@@ -26,14 +49,20 @@ export default function AccountPage({userInfo}) {
         </div>
         <div className="">
           <ul className="flex flex-row justify-center space-x-12 border">
-            <li><button>Profile</button></li>
-            <li><button>Games</button></li>
-            <li><button onClick={() => setShowReviews(true)}>Reviews</button></li>
-            <li><button>Network</button></li>
+            <li><button onClick={() => displayProfileDefault()}>Profile</button></li>
+            <li><button onClick={() => displayGamesPlaylist()}>Games</button></li>
+            <li><button onClick={() => displayUserReviews()}>Reviews</button></li>
+            <li><button onClick={() => displayUserNetwork()}>Network</button></li>
           </ul>
         </div>
-        <div id="container">
+        <div id="reviewsContainer">
           {showReviews ? <UserReviews id={id}/> : null}
+        </div>
+        <div id="gamesContainer">
+          {showGames ? <UserGames id={id}/> : null}
+        </div>
+        <div id="netWorkContainer">
+          {showNetwork ? <UserNetwork id={id}/> : null}
         </div>
         </div>
       </>
@@ -47,6 +76,7 @@ export default function AccountPage({userInfo}) {
 }
 
 export async function getServerSideProps(context) {
+  console.log('context', context)
   // const userGameReviews = await prisma.review.findMany({
   //   where: {id}
   // })

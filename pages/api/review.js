@@ -2,15 +2,8 @@
 
 // import { PrismaClient } from '@prisma/client';
 
-<<<<<<< Updated upstream
-import { PrismaClient } from '@prisma/client';
-import { getSession } from 'next-auth/react';
-
-const prisma = new PrismaClient();
-=======
 // const prisma = new PrismaClient();
 import prisma from "./prisma";
->>>>>>> Stashed changes
 
 export default async (req, res) => {
   const getUser = await prisma.user.findFirst({
