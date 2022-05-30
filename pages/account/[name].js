@@ -16,12 +16,8 @@ export default function accountPage() {
   const userInfo = {image, name, id}
   const fetchedData = async () => { if (session) {
     let temp = await fetchUserInfo(session.user.email);
-<<<<<<< Updated upstream
-    if (temp != null) {
-=======
     if (temp.data != null) {
       // console.log('temp', temp);
->>>>>>> Stashed changes
       setId(temp.data.id);
       setImage(temp.data.image);
       setName(temp.data.name);

@@ -1,22 +1,22 @@
 import fetchUserReviews from "./FetchUserReviews";
+import { useState, useEffect } from "react";
+import AccountPageReviewCard from './AccountPageReviewCard';
 
 export default function UserReviews({id}) {
-
-  async function fetchReviews(id) {
-    const reviews = await prisma.reviews.findMany({
-      where: {userId: id}
-    })
-    return {
-      props: {reviews}
-    }
-  }
-
-  const res = fetchReviews(id);
-  console.log('res', res);
-
+  let reviews = [];
+  async function fetchReviews() {
+    const res = await fetchUserReviews(id);
+    reviews = res;
+    console.log('review 9', reviews);
+  } 
+  useEffect(() => {fetchReviews()},[]);
+  
+  console.log('res', reviews);
   return (
     <div>
-      Display of user reviews:
+      {rev.map((review, i) => (
+        <AccountPageReviewCard review={review} key={i}/>
+      ))}
      
     </div>
   )
