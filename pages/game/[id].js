@@ -58,15 +58,7 @@ function GamePage({ game, allGameReviews }) {
 
   async function saveReview(e) {
     e.preventDefault();
-<<<<<<< Updated upstream
-    console.log(formData);
-<<<<<<< HEAD
     // setMovies([...movies, formData]);
-=======
-    console.log('formdata', formData);
->>>>>>> Stashed changes
-=======
->>>>>>> new_user
     const response = await fetch('/api/review', {
       method: 'POST',
       body: JSON.stringify(formData),
@@ -233,23 +225,13 @@ function GamePage({ game, allGameReviews }) {
               </Box>
             </Modal>
           ) : (
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-            <>Please log in to leave a review!</>
-=======
+
             <Modal open={open} onClose={handleClose}>
               <Box sx={style}>
                 <p>Log in to leave a review!</p>
               </Box>
             </Modal>
->>>>>>> Stashed changes
-=======
-            <Modal open={open} onClose={handleClose}>
-              <Box sx={style}>
-                <p>Please log in to leave a review!</p>
-              </Box>
-            </Modal>
->>>>>>> new_user
+
           )}
         </div>
         <Container sx={{ padding: 20 }}>
@@ -269,33 +251,10 @@ export async function getServerSideProps(context) {
   const { id } = context.params;
   const res = await axios(`${server}/${id}?key=${API_KEY}`);
   const game = res.data;
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  const allReviewsGame = await prisma.review.findMany({
-=======
-  const allGameReviews = await prisma.review.findMany({
->>>>>>> new_user
-    // orderBy: {
-    //   createdAt: 'desc',
-    // },
-    where: { gameId: game.id },
-    // include: {
-    //   select: {
-    //     user: true,
-    //   },
-    // },
-    //include: user
-  });
-<<<<<<< HEAD
 
-=======
   const allGameReviews = await prisma.review.findMany({
     where: { gameId: game.id },
   });
->>>>>>> Stashed changes
-=======
-  console.log('allreviews', allGameReviews);
->>>>>>> new_user
   return {
     props: {
       game,

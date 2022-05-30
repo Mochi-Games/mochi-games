@@ -8,6 +8,7 @@ import UserNetwork from "./UserNetwork";
 
 
 export default function AccountPage({userInfo}) {
+
   const id = userInfo.id;
   const image = userInfo.image;
   const name = userInfo.name;
