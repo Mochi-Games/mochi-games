@@ -35,7 +35,7 @@ function WelcomeHero() {
                   </svg>
                 </div>
                 <p className="ml-16 text-lg leading-6 font-medium text-gray-900">
-                  Keep track of every games you've played
+                  Keep track of every game you've played
                 </p>
               </dt>
               {/* <dd className="mt-2 ml-16 text-base text-black">
@@ -63,8 +63,8 @@ function WelcomeHero() {
                   </svg>
                 </div>
                 <p className="ml-16 text-lg leading-6 font-medium text-gray-900">
-                  Rate each game on a five-star scale (with halves) to record
-                  and share your reaction
+                  Rate each game on a five-star scale to record and share your
+                  reaction
                 </p>
               </dt>
               {/* <dd className="mt-2 ml-16 text-base text-black">
