@@ -4,9 +4,9 @@ import Link from 'next/link';
 
 const ROUTE_POST_ID = 'game/[id]';
 
-function SearchResults({ results, genreResults }) {
+function GenreResults({ genreResults }) {
   const router = useRouter();
-
+  console.log(genreResults);
   const navigate = (id) =>
     router.push({
       pathname: ROUTE_POST_ID,
@@ -14,11 +14,11 @@ function SearchResults({ results, genreResults }) {
     });
   return (
     <div>
-      {results.results?.map((result) => (
+      {/* {genreResults.results?.map((result) => (
         <div key={`game-${result.id}`} onClick={() => navigate(result.id)}>
           <SearchItem key={result.id} result={result} />
         </div>
-      ))}
+      ))} */}
     </div>
   );
   //   const router = useRouter();
@@ -40,4 +40,4 @@ function SearchResults({ results, genreResults }) {
   //   );
 }
 
-export default SearchResults;
+export default GenreResults;

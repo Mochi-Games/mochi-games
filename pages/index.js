@@ -3,7 +3,7 @@ import Results from '../components/Results';
 import WelcomeHero from '../components/WelcomeHero';
 import axios from 'axios';
 import { server } from '../utils';
-import { useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react';
 
 // import requests from '../utils/requests';
 // import Thumbnail from '../components/Thumbnail';
@@ -30,12 +30,8 @@ export default function Home({ results }) {
 }
 
 export async function getServerSideProps() {
-  // const API_KEY = process.env.RAWG_API_KEY;
   const res = await axios.get(`${server}?key=${API_KEY}&page_size=6`);
   const games = res.data.results;
-  // const request = await fetch(
-  //   `https://api.rawg.io/api/games?key=${API_KEY}&page_size=6`
-  // ).then((res) => res.json());
 
   return {
     props: {

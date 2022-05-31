@@ -7,6 +7,10 @@ import SearchResults from '../components/SearchResults';
 import Pagination from '@mui/material/Pagination';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
+import { Container } from '@mui/material';
+import GenreBar from '../components/GenreBar';
+import requests from '../utils/requests';
+import GenreResults from '../components/GenreResults';
 
 const API_KEY = process.env.RAWG_API_KEY;
 
@@ -16,9 +20,9 @@ const CustomPaginator = styled(Pagination)`
   }
 `;
 
-function Search({ results }) {
+function Search({ results, genreResults }) {
   const [page, setPage] = useState(1);
-  console.log('results', results);
+  // console.log('results', results);
   const router = useRouter();
 
   function handlePagination(e, value) {
@@ -26,19 +30,27 @@ function Search({ results }) {
     router.push(`search?term=${router.query.term}&page=${value}`);
   }
 
+  const handleClick = () => {
+    console.log('You clicked the Chip.');
+  };
+
   return (
     <>
       <Head>
         <title>{router.query.term} - Search </title>
       </Head>
-      <p>Showing results for {router.query.term}</p>
+      <GenreBar />
+      <p>Showing results for '{router.query.term}'</p>
+      <GenreResults genre={genreResults} />
       <SearchResults results={results} />
-      <CustomPaginator
-        color="primary"
-        page={page}
-        count={10}
-        onChange={handlePagination}
-      />
+      <Container sx={{ color: 'white' }}>
+        <CustomPaginator
+          color="primary"
+          page={page}
+          count={10}
+          onChange={handlePagination}
+        />
+      </Container>
     </>
   );
 }
@@ -55,13 +67,22 @@ export async function getServerSideProps(context) {
   const res = useDummyData
     ? Response
     : await axios(
-        `${server}?search=${context.query.term}&page=${context.query.page}&key=${API_KEY}`
+        `${server}?search=${context.query.term}&metacritic=80,100&page=${context.query.page}&key=${API_KEY}`
       );
   const results = res.data;
+
+  const genre = context.query.genre;
+  console.log('genre', context);
+
+  // const genreRequest = await axios(
+  //   `${server}${requests[genre]?.url}&key=${API_KEY}`
+  // );
+  // const genreResults = genreRequest.data;
 
   return {
     props: {
       results,
+      // genreResults,
     },
   };
 }

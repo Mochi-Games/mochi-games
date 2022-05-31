@@ -246,6 +246,7 @@ function GamePage({ game, allGameReviews }) {
 export default GamePage;
 
 export async function getServerSideProps(context) {
+  console.log(context);
   const { id } = context.params;
   const res = await axios(`${server}/${id}?key=${API_KEY}`);
   const game = res.data;

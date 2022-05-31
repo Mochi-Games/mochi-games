@@ -1,14 +1,46 @@
 import Image from 'next/image';
-import Paper from '@mui/material/Paper';
+
 import Link from 'next/link';
+import { List, ListItem, ListItemText, Divider } from '@mui/material';
+import noimage from '../public/no_image.jpeg';
 
 function SearchItem({ result }) {
-  console.log(result.id);
+  //   console.log(result.id);
   return (
     <Link href={`/game/[id]`} as={`/game/${result.slug}`}>
-      <div>
-        <h2>{result.name}</h2>
-      </div>
+      <List
+        sx={{
+          width: '100%',
+          maxWidth: 360,
+        }}
+      >
+        <ListItem>
+          <ListItemText
+            primary={`${result.name} (${result.released})`}
+          ></ListItemText>
+
+          {/* <Image
+            layout="responsive"
+            src={result.background_image}
+            height={720}
+            width={1280}
+          /> */}
+        </ListItem>
+
+        {result.background_image && (
+          <Image
+            layout="responsive"
+            src={
+              `${result.background_image}` ||
+              `${result.background_image_additional}`
+            }
+            height={720}
+            width={1280}
+            alt="no-image"
+          />
+        )}
+        <Divider variant="inset" component="li" />
+      </List>
     </Link>
   );
 }
