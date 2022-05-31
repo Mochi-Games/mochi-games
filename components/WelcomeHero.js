@@ -35,18 +35,14 @@ function WelcomeHero() {
                   </svg>
                 </div>
                 <p className="ml-16 text-lg leading-6 font-medium text-gray-900">
-                  Keep track of every games you've played
+                  Keep track of every game you've played
                 </p>
               </dt>
-              {/* <dd className="mt-2 ml-16 text-base text-black">
-                Keep track of every games you've played
-              </dd> */}
             </div>
 
             <div className="relative">
               <dt>
                 <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                  {/* <!-- Heroicon name: outline/scale --> */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -63,20 +59,15 @@ function WelcomeHero() {
                   </svg>
                 </div>
                 <p className="ml-16 text-lg leading-6 font-medium text-gray-900">
-                  Rate each game on a five-star scale (with halves) to record
-                  and share your reaction
+                  Rate each game on a five-star scale to record and share your
+                  reaction
                 </p>
               </dt>
-              {/* <dd className="mt-2 ml-16 text-base text-black">
-                Rate each game on a five-star scale (with halves) to record and
-                share your reaction
-              </dd> */}
             </div>
 
             <div className="relative">
               <dt>
                 <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                  {/* <!-- Heroicon name: outline/lightning-bolt --> */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -97,16 +88,11 @@ function WelcomeHero() {
                   to read theirs
                 </p>
               </dt>
-              {/* <dd className="mt-2 ml-16 text-base text-black">
-                Write and share reviews, and follow friends and other memebers
-                to read theirs
-              </dd> */}
             </div>
 
             <div className="relative">
               <dt>
                 <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                  {/* <!-- Heroicon name: outline/annotation --> */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -127,9 +113,6 @@ function WelcomeHero() {
                   see
                 </p>
               </dt>
-              {/* <dd className="mt-2 ml-16 text-base text-black">
-                Compile and share lists of games and keep a list of games to see
-              </dd> */}
             </div>
           </dl>
         </div>

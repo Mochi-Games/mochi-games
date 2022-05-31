@@ -6,6 +6,9 @@ import { useRouter } from 'next/router';
 import SearchResults from '../components/SearchResults';
 import Pagination from '@mui/material/Pagination';
 import { styled } from '@mui/material/styles';
+import { useState } from 'react';
+import { Container } from '@mui/material';
+import GenreBar from '../components/GenreBar';
 
 const API_KEY = process.env.RAWG_API_KEY;
 
@@ -16,16 +19,34 @@ const CustomPaginator = styled(Pagination)`
 `;
 
 function Search({ results }) {
-  console.log('results', results);
+  const [page, setPage] = useState(1);
   const router = useRouter();
+
+  function handlePagination(e, value) {
+    setPage(value);
+    router.push(`search?term=${router.query.term}&page=${value}`);
+  }
+
+  const handleClick = () => {
+    console.log('You clicked the Chip.');
+  };
+
   return (
     <>
       <Head>
         <title>{router.query.term} - Search </title>
       </Head>
-      <p>Showing results for {router.query.term}</p>
+      <GenreBar />
+      <p>Showing results for '{router.query.term}'</p>
       <SearchResults results={results} />
-      <CustomPaginator color="primary" count={10} />
+      <Container sx={{ color: 'white' }}>
+        <CustomPaginator
+          color="primary"
+          page={page}
+          count={10}
+          onChange={handlePagination}
+        />
+      </Container>
     </>
   );
 }
@@ -34,11 +55,16 @@ export default Search;
 
 export async function getServerSideProps(context) {
   const useDummyData = false;
-  console.log('context', context);
+  console.log('context', context.query);
+  if (!context.query.page) {
+    context.query.page = 1;
+  }
 
   const res = useDummyData
     ? Response
-    : await axios(`${server}?search=${context.query.term}&key=${API_KEY}`);
+    : await axios(
+        `${server}?search=${context.query.term}&metacritic=80,100&page=${context.query.page}&key=${API_KEY}`
+      );
   const results = res.data;
 
   return {

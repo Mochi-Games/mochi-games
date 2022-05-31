@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 const ROUTE_POST_ID = 'game/[id]';
 
 function Results({ results }) {
-  // console.log('results', results);
   const router = useRouter();
 
   const navigate = (id) =>
