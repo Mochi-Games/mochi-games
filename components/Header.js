@@ -3,7 +3,6 @@ import {
   HomeIcon,
   LoginIcon,
   LogoutIcon,
-  SearchIcon,
   UserIcon,
 } from '@heroicons/react/outline';
 import mochigames from '../public/mochigames.png';
@@ -98,30 +97,21 @@ function Header() {
           <div className="flex flex-grow justify-evenly max-w-2xl">
             <Link href="/">
               <a>
-                {' '}
-                <Image
-                  src={mochigames.src}
-                  width={200}
-                  height={100}
-                  alt="mochi-games-logo"
-                />
+                <Image src={mochigames.src} width={200} height={100} />
               </a>
             </Link>
-            {/* <Link href="/search"> */}
+
             <a>
-              {/* <HeaderItem title="SEARCH" Icon={SearchIcon} /> */}
               <Search>
                 <SearchIconWrapper></SearchIconWrapper>
                 <StyledInputBase
                   placeholder="Search…"
-                  // inputProps={{ 'aria-label': 'search' }}
                   inputRef={searchInputRef}
                   onKeyPress={search}
                 />
                 <SearchIconMUI onClick={search} />
               </Search>
             </a>
-            {/* </Link> */}
           </div>
           <div className="flex flex-grow justify-evenly max-w-2xl">
             <Link href="/">

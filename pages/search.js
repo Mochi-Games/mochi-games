@@ -9,8 +9,6 @@ import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 import { Container } from '@mui/material';
 import GenreBar from '../components/GenreBar';
-import requests from '../utils/requests';
-import GenreResults from '../components/GenreResults';
 
 const API_KEY = process.env.RAWG_API_KEY;
 
@@ -20,9 +18,8 @@ const CustomPaginator = styled(Pagination)`
   }
 `;
 
-function Search({ results, genreResults }) {
+function Search({ results }) {
   const [page, setPage] = useState(1);
-  // console.log('results', results);
   const router = useRouter();
 
   function handlePagination(e, value) {
@@ -41,7 +38,6 @@ function Search({ results, genreResults }) {
       </Head>
       <GenreBar />
       <p>Showing results for '{router.query.term}'</p>
-      <GenreResults genre={genreResults} />
       <SearchResults results={results} />
       <Container sx={{ color: 'white' }}>
         <CustomPaginator
@@ -71,18 +67,9 @@ export async function getServerSideProps(context) {
       );
   const results = res.data;
 
-  const genre = context.query.genre;
-  console.log('genre', context);
-
-  // const genreRequest = await axios(
-  //   `${server}${requests[genre]?.url}&key=${API_KEY}`
-  // );
-  // const genreResults = genreRequest.data;
-
   return {
     props: {
       results,
-      // genreResults,
     },
   };
 }

@@ -62,34 +62,9 @@ function GamePage({ game, allGameReviews }) {
   function refreshPage() {
     window.location.reload(false);
   }
-  //   const [comment, setComment] = useState('');
-  //   const [rating, setRating] = useState('');
-
-  //   const submitHandler = async (e) => {
-  //     // create api endpoint to create a review and send a post req
-  //     e.preventDefault();
-  //     try {
-  //       const body = { comment, rating };
-  //       await axios('../api/create', {
-  //         method: 'POST',
-  //         headers: { 'Content-Type': 'application/json' },
-  //         body: JSON.stringify(body),
-  //       });
-  //     } catch (err) {
-  //       console.log(err.response.data);
-  //     }
-  //   };
-
-  //   const resetInputFields = () => {
-  //     setTimeout(() => {
-  //       setComment('');
-  //       setRating('');
-  //     }, 3000);
-  //   };
 
   console.log('gamepageresults', game);
   console.log('review', allGameReviews);
-  // console.log('session', session.data.user.email);
 
   return (
     <>
@@ -98,9 +73,6 @@ function GamePage({ game, allGameReviews }) {
           <div className={styles.image_wrapper}>
             <img src={game.background_image_additional} />
           </div>
-          {/* <Typography variant="h3" gutterBottom component="div">
-            {game.name}
-          </Typography> */}
           <Container sx={{ display: 'flex', paddingTop: 50 }}>
             <Card sx={{ maxWidth: 300, maxHeight: 300 }}>
               <CardMedia

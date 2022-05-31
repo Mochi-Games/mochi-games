@@ -21,7 +21,6 @@ export default Genre;
 
 export async function getServerSideProps(context) {
   const genre = context.query.genre;
-  //   console.log('context', context);
 
   const genreRequest = await axios(`${server}${requests[genre]?.url}`);
   const genreResults = genreRequest.data;

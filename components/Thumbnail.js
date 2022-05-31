@@ -3,7 +3,6 @@ import Paper from '@mui/material/Paper';
 import Link from 'next/link';
 
 function Thumbnail({ result }) {
-  // console.log('result', result);
   return (
     <Link href={`/game/[id]`} as={`/game/${result.slug}`}>
       <div className="w-full rounded items-center cursor-pointer group hover:text-white">

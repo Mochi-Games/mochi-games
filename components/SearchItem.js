@@ -5,7 +5,6 @@ import { List, ListItem, ListItemText, Divider } from '@mui/material';
 import noimage from '../public/no_image.jpeg';
 
 function SearchItem({ result }) {
-  //   console.log(result.id);
   return (
     <Link href={`/game/[id]`} as={`/game/${result.slug}`}>
       <List
@@ -18,13 +17,6 @@ function SearchItem({ result }) {
           <ListItemText
             primary={`${result.name} (${result.released})`}
           ></ListItemText>
-
-          {/* <Image
-            layout="responsive"
-            src={result.background_image}
-            height={720}
-            width={1280}
-          /> */}
         </ListItem>
 
         {result.background_image && (
