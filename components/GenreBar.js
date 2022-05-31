@@ -9,7 +9,7 @@ function GenreBar() {
     <nav>
       <div className="flex px-10 space-x-10">
         {Object.entries(requests).map(([key, { title, url }]) => (
-          <Stack direction="row" spacing={1}>
+          <Stack direction="row" spacing={1} key={key}>
             <Chip
               label={title}
               color="primary"
